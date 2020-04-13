@@ -22,4 +22,12 @@ The article will proceed in the following way:
 * Importance of WoE & IV
 * Automation of calculations of WoE & IV on RShiny
 
+**Weight of Evidence (WoE)**
+The weight of evidence tells the predictive power of an independent variable in relation to the dependent variable. It was 
+involved from credit scoring world, so it a measure to separate between goods and bads.
 
+```python
+
+Weight of Evidence  = **ln(Distribution of Goods/Distribution of Bads)**
+
+```
