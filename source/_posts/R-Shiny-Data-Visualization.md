@@ -111,4 +111,17 @@ the packages that exist in R can be used and integrated with RShiny.
 
 ![IV Image](https://github.com/jhawakshay/heroku_hexo/tree/master/source/images/IV.png)
 
+I have created a Dashbaord on RShiny where WoE & IV can be automatically done for all the different variables in a dataset.
+In the Dashboard the process is followed as below:
 
+1. Upload any file on the Dashbaord with click of a button
+1. Analyze and view the columns of the data. A view shows some of the entries in the Dataset
+1. Select any variable and do automatic binning. The binning results shows WoE & IV for each of the bins/groups creates
+1. Select any variable and do manual binning. Manual bins can be created by just specifying the cuts for each group.
+1. Repeat the process and fine tune each WoE for all the variables.
+
+Usually, this process could take hours for one variable but with this Dashboard it can be done in mintues.
+
+Below is the link to the code of the Dashboard on Github along with a sample video where I have shown how a binning is done.
+All the codes are written on R.
+[Github Link](https://github.com/jhawakshay/Dashboard "Dashbaord codes")
