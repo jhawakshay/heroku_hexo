@@ -13,14 +13,14 @@ How did the idea came?
 I was planning for my Vietnam Trip with my family and was confused which cities should I visit first and then in the remaining order.
 This can be a crucial thing if you are visiting a country which has around 6-7 cities all over the spread. To save time and money one can have a very quick view of the visualization.
 
-**I have hosted the app on the R Server and below is the link to it:**
-[Travel Map](https://akshay-jhawar-me.shinyapps.io/PlanningMap/ "Travel Map")
-You might need to wait for few seconds before it opens.
+**I have hosted the app on the R Server and below is the link to it:** <br/>
+[Travel Map](https://akshay-jhawar-me.shinyapps.io/PlanningMap/ "Travel Map") <br/>
+_You might need to wait for few seconds before it opens._
 
 **Also, link to the codes are shared below:**
-[Github Repository](https://github.com/jhawakshay/Trip_Visualization "Trip Visualization")
+[Github Repository](https://github.com/jhawakshay/Trip_Visualization "Trip Visualization") </br>
 
-I will be working adding more features like Temperature, Idea months to visit, Train & Air Services.
-Write to akshayjhawar.nitj@gmail.com if you have any suggestion or queries!
-
+I will be working adding more features like Temperature, Idea months to visit, Train & Air Services.<br/>
+Write to akshayjhawar.nitj@gmail.com if you have any suggestion or queries!<br/>
+<br/>
 Until then keep travelling & keep learning!
