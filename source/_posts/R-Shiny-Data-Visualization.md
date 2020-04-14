@@ -1,6 +1,6 @@
 ---
 title: Using smbinning & RShiny to automate WoE & IV
-date: 2020-04-06 21:58:47
+date: 2019-12-23 21:58:47
 tags: [R Shiny, Data Visualization, Fintech, Banking]
 ---
 
@@ -48,7 +48,7 @@ Weight of Evidence  = ln(% of Non-Events/% of Events)
 1. Calculate the % of events and % of non-events of each group
 1. Calculate the WoE by taking the natural log of division of % of non-events and % events
 
-**An example **
+**An example**
 There are 300 customers in a portfolio of Credit Cards where the number of Defaults (Events) are 40 and number of 
 Non-Defaults (Non-Events) are 260. A WoE table will be like this:
 
@@ -78,6 +78,7 @@ IV = (% of Goods - % Bads) * WoE
 ```
 
 **General**
+
 ```python
 IV = (% of Non-Events - % Events) * WoE
 ```
@@ -99,7 +100,7 @@ To arrive at the optimum binning of one variable and calculate the IV, it is a r
 optimum bins, calculate WoE & then re-group or create more groups, and again calculate WoE.
 
 Now suppose if there are 100 variables and you have to calculate WoE & IV for each of the variable. It requires a lot of time
-& effort. There is where I tried developing a **RShiny Dashbaord** using **smbinning package"" which automates the whole process 
+& effort. There is where I tried developing a **RShiny Dashbaord** using **smbinning package** which automates the whole process 
 and gives results instantaneusly.
 
 **Dashboarding on RShiny**
@@ -108,4 +109,4 @@ RShiny is a powerful open source dashboarding tool which can be used to automate
 drive value analysis and much more. There are important widgets like file input, Slider, Dropwdowns and on top of them all
 the packages that exist in R can be used and integrated with RShiny.
 
-![IV Image](https://github.com/jhawakshay/Dashboard/IV.png)
+![IV Image](/source/images/IV.png)
