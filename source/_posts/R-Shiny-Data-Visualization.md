@@ -125,3 +125,6 @@ Usually, this process could take hours for one variable but with this Dashboard 
 Below is the link to the code of the Dashboard on Github along with a sample video where I have shown how a binning is done.
 All the codes are written on R.
 [Github Link](https://github.com/jhawakshay/Dashboard "Dashbaord codes")
+
+Write to me at akshayjhawar.nitj@gmail.com for any queries.
+Until then Keep learning & Keep Dashbaording!
