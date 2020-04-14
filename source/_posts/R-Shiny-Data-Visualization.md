@@ -109,6 +109,6 @@ RShiny is a powerful open source dashboarding tool which can be used to automate
 drive value analysis and much more. There are important widgets like file input, Slider, Dropwdowns and on top of them all
 the packages that exist in R can be used and integrated with RShiny.
 
-![IV Image](\source\images\IV.png)
+![IV Image](//source/images/IV.png)
 
 
