@@ -5,4 +5,4 @@ tags: [Classification, Statistical Modelling]
 ---
 
 
-## What is it about Accuracy, Precision, Recall and F1 Score
+## What is it about Accuracy, Precision, Recall and F1 Score?
