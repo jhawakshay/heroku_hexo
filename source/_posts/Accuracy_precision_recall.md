@@ -13,5 +13,5 @@ So, the cancer rate is around 2% which is rare-event sceanrio. Other types of ra
 
 In our example, if we take 1000 patients as our dataset and create a model which predict if a person will have a cancer or not. After following the mdoelling process, we arrive at a confusion matrix as follows:
 
-[![IV Image](/source/images/DASHENG-900x700-1.png)]
+[<img src= "https://github.com/jhawakshay/heroku_hexo/tree/master/source/images/IV.png"](IV)
 
