@@ -109,7 +109,7 @@ RShiny is a powerful open source dashboarding tool which can be used to automate
 drive value analysis and much more. There are important widgets like file input, Slider, Dropwdowns and on top of them all
 the packages that exist in R can be used and integrated with RShiny.
 
-![IV Image](/source/images/DASHENG-900x700-1.png)
+[![IV Image](https://github.com/jhawakshay/heroku_hexo/tree/master/source/images/IV.png)]
 
 I have created a Dashbaord on RShiny where WoE & IV can be automatically done for all the different variables in a dataset.
 In the Dashboard the process is followed as below:
