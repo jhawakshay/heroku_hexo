@@ -4,6 +4,7 @@ date: 2019-12-23 21:58:47
 tags: [R Shiny, Data Visualization, Fintech, Banking]
 ---
 
+{}
 
 ## Developing Scorecards for your portfolio
 ###### Smbinning Package for Scorecard Analysis
