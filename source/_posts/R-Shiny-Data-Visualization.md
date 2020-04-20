@@ -111,8 +111,6 @@ the packages that exist in R can be used and integrated with RShiny.
 
 ![IV Image](/images/IV.png)
 
-[![Video](https://www.youtube.com/watch?v=3KXZduvOfDo&list=RD3KXZduvOfDo&start_radio=1 "Guru Randhawa")]
-
 I have created a Dashbaord on RShiny where WoE & IV can be automatically done for all the different variables in a dataset.
 In the Dashboard the process is followed as below:
 
