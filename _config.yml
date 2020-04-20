@@ -74,6 +74,7 @@ tag_map:
 meta_generator: true
 
 fancybox: true
+disqus_shortname: akshay_09
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
