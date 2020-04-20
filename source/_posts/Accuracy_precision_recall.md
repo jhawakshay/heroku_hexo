@@ -13,11 +13,11 @@ So, the cancer rate is around 2% which is rare-event sceanrio. Other types of ra
 
 In our example, if we take 1000 patients as our dataset and create a model which predict if a person will have a cancer or not. After following the mdoelling process, we arrive at a confusion matrix as follow:
 
-![Confusion matrix](/images/confusion_1.png)
+![Confusion matrix](/images/confusion_1.PNG)
 
 And below is the confusion matrix for the above example where the cancer detection rate is 2%. Suppose, we created a statistical model to detect if a person has a cancer or not and arrive at the following matrix.
 
-![Confusion matrix for Cancer Detection](/images/confusion_2.png)
+![Confusion matrix for Cancer Detection](/images/confusion_2.PNG)
 
 Finally, if you look at this
 
