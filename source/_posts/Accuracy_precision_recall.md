@@ -1,7 +1,7 @@
 ---
 title: The curious case of Accuracy, Precision, Recall and F1 Score
 date: 2019-12-29 21:58:47
-tags: [Classification, Statistical Modelling]
+tags: [Classification, Statistical Modelling, Accuracy, Confusion matrix]
 ---
 
 
@@ -12,6 +12,8 @@ We as Data Scientist have come across a lot metrics like Accuracy and Precision 
 So, the cancer rate is around 2% which is rare-event sceanrio. Other types of rare-events are Spam email detection, Defaulters of a loan or detecting frauds on online transactions.
 
 In our example, if we take 1000 patients as our dataset and create a model which predict if a person will have a cancer or not. After following the mdoelling process, we arrive at a confusion matrix as follows:
+
+
 
 
 
