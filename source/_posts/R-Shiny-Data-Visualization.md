@@ -1,10 +1,10 @@
 ---
 title: Using smbinning & RShiny to automate WoE & IV
 date: 2019-12-23 21:58:47
+image : /images/IV.png
 tags: [R Shiny, Data Visualization, Fintech, Banking]
 ---
 
-{ % fancybox  /images/IV.png %}
 
 ## Developing Scorecards for your portfolio
 ###### Smbinning Package for Scorecard Analysis
