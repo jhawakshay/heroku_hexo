@@ -18,7 +18,7 @@ As Data Scientists or Data Analysts, one needs to find a solution to a problem. 
 I am a big fan of data.table package in R. With a single use of this package, my Data wrangling & Analysis becomes really super faster with just few lines of codes. Without wasting much of your time, here is the fix.
 
 **File Input Widget**
-![File imported successfuly when size is 5MB or less](/images/datatable/Image_Upload_Complete.JPG)
+![File imported successfuly when size is 5MB or less](/images/datatable/Image_Upload_complete.JPG)
 
 As soon as I increase the file size, I get the following error.
 ![File imported successfuly when size is 5MB or less](/images/datatable/Image_Upload_Error.JPG)
@@ -90,19 +90,19 @@ UI <-
 ```
 
 **First View: Showing the elements**
-![First View](/images/datatable/First Look.JPG)
+![First View](/images/datatable/First_Look.JPG)
 
 **Second View: Copy the location and find files**
-![Second look of the Dashboard](/images/datatable/Second Look.JPG)
+![Second look of the Dashboard](/images/datatable/Second_Look.JPG)
 
 **Third View: Select the file to be imported**
-![Third look of the Dashboard](/images/datatable/Third Look.JPG)
+![Third look of the Dashboard](/images/datatable/Third_Look.JPG)
 
 **Fourth View: Upload Progress Indicator**
-![Fourth look of the Dashboard](/images/datatable/Fourth Look.JPG)
+![Fourth look of the Dashboard](/images/datatable/Fourth_Look.JPG)
 
 **Fifth View: Showcase Uploaded Data**
-![Fifth look of the Dashboard](/images/datatable/Fifth Look.JPG)
+![Fifth look of the Dashboard](/images/datatable/Fifth_Look.JPG)
 
 
 **Server Function**
@@ -189,8 +189,9 @@ system.time(file.read <- fread(file = "E:/CV/Startups/InCred/Model Building Samp
 object.size(file.read)
 
 ```
+![Time Difference in read.csv & fread](/images/datatable/Console_time_difference.JPG)
 
-![fread: As fast as Usain Bolt](/images/datatable/Fifth Look.JPG)
+![fread: As fast as Usain Bolt](/images/datatable/Usain_Bolt.JPG)
 
-
-
+Until then, Keep uploading Big and Quick and do use data.table. It is an awesome package in R.</br>
+Please write to me on akshayjhawar.nitj@gmail.com for any further queries
