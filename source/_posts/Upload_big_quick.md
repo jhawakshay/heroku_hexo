@@ -18,9 +18,11 @@ As Data Scientists or Data Analysts, one needs to find a solution to a problem. 
 I am a big fan of data.table package in R. With a single use of this package, my Data wrangling & Analysis becomes really super faster with just few lines of codes. Without wasting much of your time, here is the fix.
 
 **File Input Widget**
+
 ![File imported successfuly when size is 5MB or less](/images/datatable/Image_Upload_complete.JPG)
 
-As soon as I increase the file size, I get the following error.
+As soon as I increase the file size to more than 5MB, I get the following error
+
 ![File imported successfuly when size is 5MB or less](/images/datatable/Image_Upload_Error.JPG)
 
 **Use fread to read quick and fast**
@@ -90,18 +92,23 @@ UI <-
 ```
 
 **First View: Showing the elements**
+
 ![First View](/images/datatable/First_Look.JPG)
 
 **Second View: Copy the location and find files**
+
 ![Second look of the Dashboard](/images/datatable/Second_Look.JPG)
 
 **Third View: Select the file to be imported**
-![Third look of the Dashboard](/images/datatable/Third_Look.JPG)
+
+![Third look of the Dashboard](/images/datatable/Third_Look.jpg)
 
 **Fourth View: Upload Progress Indicator**
+
 ![Fourth look of the Dashboard](/images/datatable/Fourth_Look.JPG)
 
 **Fifth View: Showcase Uploaded Data**
+
 ![Fifth look of the Dashboard](/images/datatable/Fifth_Look.JPG)
 
 
@@ -176,22 +183,11 @@ shinyApp(UI, server)
 ```
 
 **Comparison of read.csv and fread**
-```
-################################################################
-## Comparison of read.csv and fread
 
-loc <- "E:/CV/Startups/InCred/Model Building Sample"
-
-
-system.time(file.read <- read.csv(file = "E:/CV/Startups/InCred/Model Building Sample/full_data.csv"))
-system.time(file.read <- fread(file = "E:/CV/Startups/InCred/Model Building Sample/full_data.csv"))
-
-object.size(file.read)
-
-```
 ![Time Difference in read.csv & fread](/images/datatable/Console_time_difference.JPG)
 
-![fread: As fast as Usain Bolt](/images/datatable/Usain_Bolt.JPG)
 
-Until then, Keep uploading Big and Quick and do use data.table. It is an awesome package in R.</br>
+![fread: As fast as Usain Bolt](/images/datatable/Usain_Bolt.jpg)
+
+Until then, Keep uploading Big and Quick and do use datatable. It is an awesome package in R.
 Please write to me on akshayjhawar.nitj@gmail.com for any further queries
