@@ -21,7 +21,7 @@ I am a big fan of data.table package in R. With a single use of this package, my
 ![File imported successfuly when size is 5MB or less](/images/datatable/Image_Upload_Complete.JPG)
 
 As soon as I increase the file size, I get the following error.
-![File imported successfuly when size is 5MB or less](/images/datatable/Image Upload Error.JPG)
+![File imported successfuly when size is 5MB or less](/images/datatable/Image_Upload_Error.JPG)
 
 **Use fread to read quick and fast**
 In this fix, I have not used the File Input widget, instead divided the process into three steps. 
