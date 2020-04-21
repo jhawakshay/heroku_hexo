@@ -1,5 +1,5 @@
 ---
-title: Quick fix to upload Big flies in RShiny
+title: Quick fix to upload Big files in RShiny
 date: 2019-10-12 21:58:47
 tags: [R Shiny, Data Visualization,Hack, Fix, data.table, R Package]
 ---
@@ -18,7 +18,7 @@ As Data Scientists or Data Analysts, one needs to find a solution to a problem. 
 I am a big fan of data.table package in R. With a single use of this package, my Data wrangling & Analysis becomes really super faster with just few lines of codes. Without wasting much of your time, here is the fix.
 
 **File Input Widget**
-![File imported successfuly when size is 5MB or less](/images/datatable/Image Upload Complete.JPG)
+![File imported successfuly when size is 5MB or less](/images/datatable/Image_Upload_Complete.JPG)
 
 As soon as I increase the file size, I get the following error.
 ![File imported successfuly when size is 5MB or less](/images/datatable/Image Upload Error.JPG)
