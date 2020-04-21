@@ -52,7 +52,7 @@ I hope you understand the importance of all the four metrics!
 ![Reference: mc.ai](/images/Meme.jpeg)
 
 Until then keep learning and doing a lot of Recall.</br>
-Please write to me on akshayjhawar.nitj@gmail.com if you want to know more.
+Please write to me on akshayjhawar.nitj@gmail.com if you want to learn more.
 
 
 
