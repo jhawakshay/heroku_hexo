@@ -18,14 +18,20 @@ As Data Scientists or Data Analysts, one needs to find a solution to a problem. 
 I am a big fan of data.table package in R. With a single use of this package, my Data wrangling & Analysis becomes really super faster with just few lines of codes. Without wasting much of your time, here is the fix.
 
 **File Input Widget**
-![File imported successfuly when size is 5MB or less](/images/Image Upload Complete.JPG)
+![File imported successfuly when size is 5MB or less](/images/datatable/Image Upload Complete.JPG)
 
 As soon as I increase the file size, I get the following error.
-![File imported successfuly when size is 5MB or less](/images/Image Upload Error.JPG)
+![File imported successfuly when size is 5MB or less](/images/datatable/Image Upload Error.JPG)
 
+**Use fread to read quick and fast**
+In this fix, I have not used the File Input widget, instead divided the process into three steps. 
+1. Place a text input to copy the location
+1. Place a clickable button and a dropdown to select the file to upload
+1. After fetching the location and file name, reading the file with **fread from datatable package**
 
 
 **R Code**
+_Install packages_
 ```
 
 #### Packages to install ###
@@ -44,7 +50,11 @@ sapply(packages, require, character.only =T)
 ### For handling error on Shiny app ###
 options(shiny.sanitize.errors=TRUE)
 
+```
+_Create inital Dashboard design_
+Here I have used text input where the file location will be copied. Once this is done, click button **Find Files** which will list all the files in the dropdown. Now, all one has to do is select the file which is to be imported.
 
+```
 UI <-
   dashboardPage(
     dashboardHeader(title = h4("Import Big and Quick")),
@@ -76,9 +86,27 @@ UI <-
             column(9,DT::dataTableOutput("Dev.table"))
           )
         , tabName = "DataImport"))
-    ))
+    ))   
+```
+
+**First View: Showing the elements**
+![First View](/images/datatable/First Look.JPG)
+
+**Second View: Copy the location and find files**
+![Second look of the Dashboard](/images/datatable/Second Look.JPG)
+
+**Third View: Select the file to be imported**
+![Third look of the Dashboard](/images/datatable/Third Look.JPG)
+
+**Fourth View: Upload Progress Indicator**
+![Fourth look of the Dashboard](/images/datatable/Fourth Look.JPG)
+
+**Fifth View: Showcase Uploaded Data**
+![Fifth look of the Dashboard](/images/datatable/Fifth Look.JPG)
 
 
+**Server Function**
+```
 server <- function(input, output, session){
 
   ####################################################
@@ -145,8 +173,10 @@ server <- function(input, output, session){
 }
 
 shinyApp(UI, server)
+```
 
-
+**Comparison of read.csv and fread**
+```
 ################################################################
 ## Comparison of read.csv and fread
 
@@ -160,6 +190,7 @@ object.size(file.read)
 
 ```
 
+![fread: As fast as Usain Bolt](/images/datatable/Fifth Look.JPG)
 
 
 
