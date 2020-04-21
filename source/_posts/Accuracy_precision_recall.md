@@ -7,7 +7,7 @@ tags: [Classification, Statistical Modelling, Accuracy, Confusion matrix]
 
 ## What is it about Accuracy, Precision, Recall and F1 Score?
 
-We as Data Scientist have come across a lot metrics like Accuracy and Precision while developing a statistical model. It could be either a prediction of sales or a classification algorithm, we usually measure or model on Accuracy. But consider this business problem where we need to detect if a person will get cancer or not. For example, if there are 1000 persons in our dataset and there are 20 patients who have cancer. 
+We as Data Scientist use Accuracy as one of the metric to measure the performance of our statistical model. It could be either a prediction of sales or a classification algorithm, we usually measure or model on Accuracy. But consider this business problem where we need to detect if a person will get cancer or not. For example, if there are 1000 persons in our dataset and there are 20 patients who have cancer. 
 
 So, the cancer rate is around 2% which is rare-event sceanrio. Other types of rare-events are Spam email detection, Defaulters of a loan or detecting frauds on online transactions.
 
@@ -40,8 +40,19 @@ F1 Score  = 66.67% _(coincidently)_
 Do you see a drop from Accuracy to Precision, Recall & F1 Score? That's what our model is worth.
 
 **Precision**</br>
-It calculates the percentage of actual positives and total predicted positives from the model. This will give you the true picture of our model performance for the rare events as it doesn't include any element of negatives.
+It calculates the percentage of actual positives with total predicted positives from the model. This will give you the true picture of our model performance for the rare events as it doesn't include any element of negatives. A good model which is developed on an unbalanced data should have a high Precision
 
+**Recall**</br>
+It calculates the percentage of actual positives with total actual positives. Recall helps to understand how many positives the model predicted correctly vs the total number of actual positives.
+
+**F1 Score**</br>.
+F1 Score is a combination of Precision and Recall and strikes a balance between them. So, if you have a unbalanced dataset and wants to measure the performance of your model, give preference to F1 Score above Accuracy of the model.
+
+I hope you understand the importance of all the four metrics!
+![Reference: mc.ai](/images/Meme.jpeg)
+
+Until then keep learning and doing a lot of Recall.</br>
+Please write to me on akshayjhawar.nitj@gmail.com if you want to know more.
 
 
 
