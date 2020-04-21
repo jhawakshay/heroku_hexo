@@ -35,7 +35,12 @@ Let's calculate these three metrics for our model results:
 
 Precision = 10/(5+10) which is 66.67% </br>
 Recall    = 10/(5+10) which is also 66.67% </br>
-F1 Score  = 
+F1 Score  = 66.67% _(coincidently)_
+
+Do you see a drop from Accuracy to Precision, Recall & F1 Score? That's what our model is worth.
+
+**Precision**</br>
+It calculates the percentage of actual positives and total predicted positives from the model. This will give you the true picture of our model performance for the rare events as it doesn't include any element of negatives.
 
 
 
