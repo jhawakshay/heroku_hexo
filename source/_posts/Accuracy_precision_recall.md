@@ -19,7 +19,24 @@ And below is the confusion matrix for the above example where the cancer detecti
 
 ![Confusion matrix for Cancer Detection](/images/confusion_2.PNG)
 
-Finally, if you look at this
+![Accuracy of a model](/images/accuracy.PNG)
+Now, if you look at the above matrix and calculate Accuracy of our model, it is 99% as per the above formula. Realistically, the accuracy is like whooping but if you deep-dive, our model has wrongly predicted 5 patients as Non-Cancer whereas they actually had Cancer. This is really risky as losing even a patient to cancer is worrisome not only for the hospital but also for our model.
+99% accuracy doesn't do us anything good.
+
+**Trio-pack**
+
+This is why in the case of rare events data or imbalanced data, we should always focus on the three terms which I will introduce below:
+
+![Precison of a model](/images/Precision.PNG)
+![Recall of a model](/images/recall.PNG)
+![F1 score of a model](/images/F1.PNG)
+
+Let's calculate these three metrics for our model results:
+
+Precision = 10/(5+10) which is 66.67% </br>
+Recall    = 10/(5+10) which is also 66.67% </br>
+F1 Score  = 
+
 
 
 
