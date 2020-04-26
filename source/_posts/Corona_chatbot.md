@@ -62,6 +62,7 @@ raw = raw.lower()
 ```
 
 **Remove Special Characters from the Document**
+
 ```python
 review_text = re.sub(r"[^A-Za-z0-9(),!.?\'`]", " ", raw )
 review_text = re.sub(r"\'s", " 's ", review_text )
@@ -77,4 +78,58 @@ review_text = re.sub(r"\s{2,}", " ", review_text )
 ```
 
 **Tokenizing the document**
-Tokenization is the process of splitting a phrase, sentence into words
+
+```python
+sent_tokens = nltk.sent_tokenize(review_text)
+```
+Tokenization is the process of splitting a phrase or a sentence into words/ smaller chunks at the same time giving some punctuations.
+If the sentence is, **'This coronavrius has spread all over the world affecting more than 200 countires'**
+
+After Tokenization, the sentence will be broken into **'This' 'coronavirus' 'has' 'spread' 'all' 'over' 'the' 'world' 'affecting' 'more' 'than' '200' 'countries'**. Tokenization is really helpful for machines to read, understand and make meaning out of it.
+
+In the example, we have broken the document into sentence as tokens and not words. Since, we want a sentence as a reply from our chatbot, we will use sent_tokenize from nltk.
+
+**Remove STOP WORDS**
+
+```python
+stop_words = set(stopwords.words('english'))
+all_sentence =[]
+new_sentence = []
+
+for s in range(0,len(sent_tokens)-1):
+    word_tokens = word_tokenize(sent_tokens[s])
+    for w in word_tokens:
+            if w not in stop_words:
+                new_sentence.append(w)
+
+    all_sentence.append(new_sentence)
+    new_sentence = []
+```
+
+In the above code we are removing STOP WORDS from each of our sentence. A stop word is a commonly used word (such as “the”, “a”, “an”, “in”) that a search engine has been programmed to ignore. Removing STOP WORDS increase the accuracy of our model.
+
+```python
+model_sentence = [[' '.join(i)] for i in all_sentence]
+```
+
+**Tagging the document**
+
+```python
+documents = [TaggedDocument(doc, [i]) for i, doc in enumerate(model_sentence)]
+```
+
+In the above code we will be using TaggedDocument function from the Doc2Vec which tags each of the sentence and gives its a serial number. The reason I have taken this step is to help me find the similarity and return the tagged sentence  from the ChatBOT. The user response will be taken by the BOT and will pre-process and then it tries to match the text with all the tagged sentences. Whereever it matches the best, the BOT will return the sentence.
+
+**What is Doc2Vec?**
+There are two popular methods from gensim; Word2Vec and Doc2Vec. Word2Vec is a well known concept which is used to generate representation vectors out of words. In Word2Vec , each of the word is represented by a vector as any statistical model processes only numerical numbers. For you to understand Doc2Vec, I will try explaining Word2Vec first.
+
+In general, when you like to build some model using words, simply labeling/one-hot encoding them is a plausible way to go. However, when using such encoding, the words lose their meaning. e.g, if we encode Paris as id_4, France as id_6 and power as id_8, France will have the same relation to power as with Paris. We would prefer a representation in which France and Paris will be closer than France and power. 
+
+![Word2Vec functionalities](/images/Word2Vec.png)
+
+There are two algorithms under Word2Vec; Conitnous Bag of Words (CBOW) & Skip-Gram Model.
+
+**CBOW** creates a sliding window around the current word, to predict it from the context (surrounding words). Each of the word is represented as vectors but the words which represents similar names are closed by. In the above fig, three name will be close by;
+Infection-Disease = Winter. So, CBOW takes numerous similar words to predict one word
+
+**Skip-Gram** model is exactly the opposite of **CBOW**. It takes one word to predict numerous words (context). It is considered more accurate than CBOW but could be computaionally slower.
