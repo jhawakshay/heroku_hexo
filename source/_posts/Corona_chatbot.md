@@ -132,4 +132,93 @@ There are two algorithms under Word2Vec; Conitnous Bag of Words (CBOW) & Skip-Gr
 **CBOW** creates a sliding window around the current word, to predict it from the context (surrounding words). Each of the word is represented as vectors but the words which represents similar names are closed by. In the above fig, three name will be close by;
 Infection-Disease = Winter. So, CBOW takes numerous similar words to predict one word
 
+![Word2vec CBOW model](/images/Word2Vec_Rep1.png)
+
 **Skip-Gram** model is exactly the opposite of **CBOW**. It takes one word to predict numerous words (context). It is considered more accurate than CBOW but could be computaionally slower.
+
+Coming to **Doc2Vec**, it creates numerical representation of all document. But the twist here is; it also adds a Paragraph Id to the vectors. The below example will help you to understand what I am trying to explain.
+
+![Doc2Vec PV-DM model](/images/Doc2Vec_Rep1.png)
+
+So, instead of using just the words, Doc2Vec also uses another vector which is always unique to a document. So, while training the words, the document id (a document vector) is also trained. There are also two types of algorithms in Doc2Vec: 
+1. PV-DM _Distribution memmory of Paragraph Version_ which is explained in the figure above
+2. PV-DBOW _Words version of Paragraph Vector_ which is nothing but the Skip-Gram in Word2Vec.
+
+We also use Tagged document function from Doc2Vec to break each sentence into a unique document and then representing them with a unique vector (I have used this exactly).
+
+The biggets challenge about Doc2Vec is that your document should be in a good order to get good results else one has to pre-process and then train the model. Let's quickly move to the implement the Doc2Vec model.
+
+**Running the Doc2Vec Model**
+```python
+max_epochs = 400
+vec_size = 100
+alpha = 0.025
+
+model = Doc2Vec(size=vec_size,
+                alpha=alpha, 
+                min_alpha=0.00025,
+                min_count=1,
+                dm =1)
+
+model.build_vocab(documents)
+```
+epochs    = It is number of iterations to achieve accuracy
+vec_size  = Each of the word is represented with 100 numeric vectors
+alpha     = It is the learning rate
+min_count = Words below the minimum frequency are dropped and not taken into modelling
+dm        = dm=1 is PV-DM model while dm=2 is PV-DBOW
+
+The next line of code develops the vocabulary for the model. After, these steps we need to train the model.
+
+```python
+for epoch in range(max_epochs):
+    #print('iteration {0}'.format(epoch))
+    model.train(documents,
+                total_examples=model.corpus_count,
+                epochs=model.iter)
+    # decrease the learning rate
+    model.alpha -= 0.0002
+    # fix the learning rate, no decay
+    model.min_alpha = model.alpha
+
+model.save("d2v.model")
+print("Model Saved")
+```
+
+**Initialising the BOT**
+
+```python
+greeting_inputs = ("hey", "good morning", "good evening", "morning", "evening", "hi", "whatsup")
+greeting_responses = ["hey", "hey hows you?", "hello, how you doing", "hello", "Welcome, I am good and you"]
+
+def greeting(sentence):
+    for word in sentence.split():
+        if word.lower() in greeting_inputs:
+            return random.choice(greeting_responses)
+```
+We are creating a function which will give random response if a user types greetings like 'hey or 'good morning' 'good evening'. We first make it lower case and then use random.choice from the random library.
+
+**Function to get the reponse from user input**
+
+```python
+def response_(user_response):
+    chatbot_return=''
+    test_data = word_tokenize(user_response.lower())
+    v1 = model.infer_vector(test_data)
+    
+    ## Find similar sentence to the user response
+    similar_doc = model.docvecs.most_similar([v1])
+    #print(similar_doc)
+    if(similar_doc==0):
+        chatbot_return = chatbot_return + "Sorry! I don't understand you"
+        return chatbot_return
+    else:
+        #print(int(similar_doc[0][0]))
+        retunr_string = documents[int(similar_doc[0][0])][0]
+        #print(retunr_string)
+        listToStr = ' '.join([str(elem) for elem in retunr_string])
+        chatbot_return = chatbot_return + listToStr
+        return chatbot_return
+  ```
+  
+  In the above code
