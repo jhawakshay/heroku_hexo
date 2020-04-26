@@ -244,3 +244,16 @@ while(flag==True):
 
 Finally, here we are just writing some if-else conditions to get the require response from the BOT and if there is no appropiate response from the user, the BOT can say 'Sorry! I don't undersand you'. Morevoer, if one person would like to end the discussion I will be typing 'Thanks'
 
+Below is the Q&A with the BOT:
+
+![ChatBOT responses](/images/Chatbot_answers.PNG)
+
+You would notice that some of the answers are not that much accurate. Now, there could be some reasons behind this:
+1. I haven't taken enough data on Coronavirus. What I took is just 30 sentences which is very less. For Doc2Vec to perform, the data should be as long as possible.
+2. The document is also not in correct order
+3. I have to also tune the model with epoch, dm & epochs
+
+I hope you have found the article informative and gives you a brief explanation about Doc2Vec.</br>
+Until then, keep gathering information about Coronavrius.
+
+Please write to me on akshayjhawar.nitj@gmail.com, if there are any queries or you would like to disagree with me.
