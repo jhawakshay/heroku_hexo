@@ -221,4 +221,26 @@ def response_(user_response):
         return chatbot_return
   ```
   
-  In the above code
+  In the above code we take the user input, find it's vector and find a similar document/paragraph id from the syntax _model.docvecs.most_similar_. Now , if there is some similarity the BOT will find all the Tags from the documents which are similar to the user input. The good part is _model.docvecs.most_similar_ automaticaly sorts the tags as per the highest similar to the lowest similar.
+
+The syntax _documents[int(similar_doc[0][0])][0]_ returns the most similar tag id/Document id and hence we get a reply from the BOT.
+
+```python
+flag = True
+print("ChatBot: I can share some knowlegde about Coronavirus")
+while(flag==True):
+    user_response = input()
+    user_response = user_response.lower()
+    if(user_response=='thanks' or user_response =='thank you'):
+            flag = False
+            print("Chatbot: You are welcome")
+    else:
+        if(greeting(user_response)!=None):
+                print("ChatBot:" + greeting(user_response))
+        else:
+                print("Chatbot :", end = "")
+                print(response_(user_response))
+```
+
+Finally, here we are just writing some if-else conditions to get the require response from the BOT and if there is no appropiate response from the user, the BOT can say 'Sorry! I don't undersand you'. Morevoer, if one person would like to end the discussion I will be typing 'Thanks'
+
