@@ -3,6 +3,7 @@ menu:
   Home: /
   Archives: /archives
 #rss: /atom.xml
+  github: https://github.com/jhawakshay/
 
 # Content
 excerpt_link: Read More
