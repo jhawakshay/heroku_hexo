@@ -50,12 +50,14 @@ prob_['Prob_'] = np.where(prob_['Prob_']==0,0.01,prob_['Prob_'])
 ```python
 prob_.hist(column = 'Prob_')
 ```
+![Histogram using .hist()](/images/histograms/hist1.png)
 
 ### Putting some arguments into the previou plot
 
  ```python
  prob_.hist(column = 'Prob_', bins =100, grid = False, figsize = (5,5), color = 'green')
  ```
+ ![Histogram using .hist() and arguments](/images/histograms/hist2.png)
  
  ### Generating histograms using matplotlib
  
@@ -64,6 +66,7 @@ fig = plt.figure(figsize = (5,5))
 plt.hist(prob_['Prob_'],bins = 30,density=False, color = 'blue', alpha=0.9)
 plt.show()
  ```
+![Histogram using matplotlib](/images/histograms/hist3.png)
 
 ### Adding other arguments like titles, density
 
@@ -77,7 +80,8 @@ plt.xticks(fontsize =10, rotation=45)
 plt.title("Density Plot of Probability", fontsize = 20)
 plt.show()
 ```
- 
+![Histogram using matplotlib and other options](/images/histograms/hist4.png)
+
 ### Generating histograms using seaborn
 
 ```python
@@ -89,6 +93,8 @@ ax.set_xlabel("Probability")
 ax.set_ylabel("Count")
 ax.set_title("Histogram of Probability")
 ```
+
+![Histogram using seaborn](/images/histograms/hist5.png)
 
 ### Adding a density plot using Gaussian curve
 
@@ -102,6 +108,7 @@ ax.set_xlabel("Probability")
 ax.set_ylabel("Count")
 ax.set_title("Histogram of Probability")
 ```
+![Histogram using seaborn and adding density plot](/images/histograms/hist6.png)
 
 ## Comparing two distributions with two or more histograms in one plot
 
@@ -143,6 +150,8 @@ plt.ylabel("Density")
 
 
 ```
+
+![Comparing Histograms using matplotlib](/images/histograms/hist7.png)
 
 ### Using seaborn
 
@@ -188,6 +197,7 @@ for scenario in type:
     ax.set_title("Density Plot of Behaviour Scores", fontsize=15)
     plt.legend()
 ```
+![Comparing Histograms using seaborn](/images/histograms/hist8.png)
 
 ### Plotting just the Gaussian curve with the mean & median
 
@@ -212,7 +222,8 @@ for scenario in type:
     ax.set_title("Density Plot of Behaviour Scores", fontsize=15)
     plt.legend()
 ```
-
+![Comparing Histograms using seaborn and adding mean & median vertical lines](/images/histograms/hist9.png)
+![Comparing Histograms with only Density curves](/images/histograms/hist10.png)
 ### Drawing pair plot using seaborn
 
 This is helpful when we want to see distributions of all the variables at one go and how do they compare with each other. A powerful
@@ -222,6 +233,7 @@ line of code which gives immense value addition
 ax = sns.pairplot(full_, hue="Type")
 ax.fig.set_size_inches(12,8)
 ```
+![Pair Plots using seaborn](/images/histograms/hist10.png)
 
 ### Generating charts with plotly
 
@@ -236,6 +248,7 @@ fig.update_layout(
     yaxis_title="Count")
 fig.show()
 ```
+![Interactive Histograms using plotly](/images/histograms/newplot.png)
 
 ### Generating two plots
 
@@ -247,10 +260,13 @@ fig.update_layout(
     yaxis_title="Count")
 fig.show()
 ```
+![ComparingHistograms using plotly](/images/histograms/newplot1.png)
 
 And there is much more you can do.
 
-I hope you liked the basics and interesting things you can do with 
+I hope you liked the basics and interesting things you can do with histograms.
+
+Please free feel to write to me on akshayjhawar.nitj@gmail.com if you have any suggestions
 
 
 
