@@ -248,7 +248,7 @@ for i in range(0,4):
     axx[i].set_xlabel('Date')
 ```
 ![Price trend by Year and type of Avocados](/images/Avocado/hist8.png)
-
+![Price trend by Year and type of Avocados](/images/Avocado/trend.png)
 ### Check Price Volatility for each year
 
 ```python
@@ -294,6 +294,7 @@ for i in range(0,3):
     axx[i].yaxis.grid()
 ```
 ![Price Volatility](/images/Avocado/hist9.png)
+![Price Volatility](/images/Avocado/trend1.png)
 
 We can dig more deeper to find interesting trends for Seasonal changes, regions selling high volume of Avocados orsome more volume
 trends.
