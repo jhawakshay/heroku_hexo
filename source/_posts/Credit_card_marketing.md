@@ -328,7 +328,7 @@ ax.legend()
 plt.show()
 ```
 
-![Initial Clusters](/images/clustering/Intial_clusters.png)
+![Initial Clusters](/images/clustering/Initial_clusters.png)
 ![Final Clusters](/images/clustering/Cluster_3.png)
 
 #### Creating a 3-D Visualization using Plotly
