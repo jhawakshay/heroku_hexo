@@ -266,9 +266,9 @@ for c in data_model:
     g   = sns.FacetGrid(data_model, col='Cluster')
     g.map(plt.hist, c, color = "red")
 ```
-!(/images/clustering/Facet_grid_1_1.png)
-!(/images/clustering/Facet_grid_1_2.png)
-![Seaborn FacetGrid for all the clusters](/images/clustering/Facet_grid_1_3.png)
+!(/images/clustering/Facet_grid_1_1.PNG)
+!(/images/clustering/Facet_grid_1_2.PNG)
+![Seaborn FacetGrid for all the clusters](/images/clustering/Facet_grid_1_3.PNG)
 
 
 #### Seeing the clusters we try to regroup them on the basis of their variable distributions
@@ -469,17 +469,17 @@ for c in data_model:
     g   = sns.FacetGrid(data_model, col='Cluster')
     g.map(plt.hist, c, color = "red")
 ```
-!(/images/clustering/facet_grid_2_1.png)
-!(/images/clustering/facet_grid_2_2.png)
-!(/images/clustering/facet_grid_2_3.png)
-!(/images/clustering/facet_grid_2_4.png)
-!(/images/clustering/facet_grid_2_5.png)
-!(/images/clustering/facet_grid_2_6.png)
-!(/images/clustering/facet_grid_2_7.png)
-!(/images/clustering/facet_grid_2_8.png)
-!(/images/clustering/facet_grid_2_9.png)
-!(/images/clustering/facet_grid_2_10.png)
-![Profiling of the final clusters](/images/clustering/facet_grid_2_11.png)
+!(/images/clustering/facet_grid_2_1.PNG)
+!(/images/clustering/facet_grid_2_2.PNG)
+!(/images/clustering/facet_grid_2_3.PNG)
+!(/images/clustering/facet_grid_2_4.PNG)
+!(/images/clustering/facet_grid_2_5.PNG)
+!(/images/clustering/facet_grid_2_6.PNG)
+!(/images/clustering/facet_grid_2_7.PNG)
+!(/images/clustering/facet_grid_2_8.PNG)
+!(/images/clustering/facet_grid_2_9.PNG)
+!(/images/clustering/facet_grid_2_10.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_11.PNG)
 
 As we can see from the above image, following is the profile of the 5 Clusters:
 
