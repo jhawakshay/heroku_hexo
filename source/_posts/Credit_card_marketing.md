@@ -469,7 +469,17 @@ for c in data_model:
     g   = sns.FacetGrid(data_model, col='Cluster')
     g.map(plt.hist, c, color = "red")
 ```
-![Profiling of the final clusters](/images/clustering/img11.png)
+!(/images/clustering/facet_grid_2_1.png)
+!(/images/clustering/facet_grid_2_2.png)
+!(/images/clustering/facet_grid_2_3.png)
+!(/images/clustering/facet_grid_2_4.png)
+!(/images/clustering/facet_grid_2_5.png)
+!(/images/clustering/facet_grid_2_6.png)
+!(/images/clustering/facet_grid_2_7.png)
+!(/images/clustering/facet_grid_2_8.png)
+!(/images/clustering/facet_grid_2_9.png)
+!(/images/clustering/facet_grid_2_10.png)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_11.png)
 
 As we can see from the above image, following is the profile of the 5 Clusters:
 
