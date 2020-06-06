@@ -266,7 +266,10 @@ for c in data_model:
     g   = sns.FacetGrid(data_model, col='Cluster')
     g.map(plt.hist, c, color = "red")
 ```
-![Seaborn FacetGrid for all the clusters](/images/clustering/img8.png)
+!(/images/clustering/Facet_grid_1_1.png)
+!(/images/clustering/Facet_grid_1_2.png)
+![Seaborn FacetGrid for all the clusters](/images/clustering/Facet_grid_1_3.png)
+
 
 #### Seeing the clusters we try to regroup them on the basis of their variable distributions
 ##### Cluster 1 and 3 could be combined
@@ -482,7 +485,8 @@ Bank won't be able to do much business with Cluster6 and will just keep a watch 
 
 With such a small data, we are able to certainly add value to our analysis. Clustering is such an iterative but interesting exercise.
 Once, you find these clusters and Marketing team works to implement, you can see results in 2-3 months
+[Github code](https://github.com/jhawakshay/solving_fintech_with_ML)
 
 Please write to me at akshayjhawar.nitj@gmail if you have more views
 
-Until them, keep looking which cluster you belong to.
+Until then, keep looking which cluster you belong to.
