@@ -266,8 +266,8 @@ for c in data_model:
     g   = sns.FacetGrid(data_model, col='Cluster')
     g.map(plt.hist, c, color = "red")
 ```
-![](/images/clustering/Facet_grid_1_1.PNG)
-![](/images/clustering/Facet_grid_1_2.PNG)
+![Seaborn FacetGrid for all the clusters](/images/clustering/Facet_grid_1_1.PNG)
+![Seaborn FacetGrid for all the clusters](/images/clustering/Facet_grid_1_2.PNG)
 ![Seaborn FacetGrid for all the clusters](/images/clustering/Facet_grid_1_3.PNG)
 
 
@@ -456,7 +456,7 @@ plotly.offline.iplot(fig, filename='mesh3d_sample')
 
 ```
 ![3-D Visualization with Plotly](/images/clustering/newplot.png)
-<img src="/images/clustering/ezgif.com-video-to-gif.gif" style="width:400;height:400;">
+![3-D Visualization with Plotly](/images/clustering/ezgif.com-video-to-gif.gif)
 
 With this image you won't be able to interact with the plot but in my github code (Link given at the end) you will be able to easily interact with the 3-D visualization. Plotly is so powerful!
 
@@ -470,16 +470,16 @@ for c in data_model:
     g   = sns.FacetGrid(data_model, col='Cluster')
     g.map(plt.hist, c, color = "red")
 ```
-![](/images/clustering/facet_grid_2_1.PNG)
-![](/images/clustering/facet_grid_2_2.PNG)
-![](/images/clustering/facet_grid_2_3.PNG)
-![](/images/clustering/facet_grid_2_4.PNG)
-![](/images/clustering/facet_grid_2_5.PNG)
-![](/images/clustering/facet_grid_2_6.PNG)
-![](/images/clustering/facet_grid_2_7.PNG)
-![](/images/clustering/facet_grid_2_8.PNG)
-![](/images/clustering/facet_grid_2_9.PNG)
-![](/images/clustering/facet_grid_2_10.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_1.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_2.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_3.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_4.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_5.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_6.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_7.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_8.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_9.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_10.PNG)
 ![Profiling of the final clusters](/images/clustering/facet_grid_2_11.PNG)
 
 As we can see from the above image, following is the profile of the 5 Clusters:
@@ -500,4 +500,4 @@ Once, you find these clusters and Marketing team works to implement, you can see
 
 Please write to me at akshayjhawar.nitj@gmail if you have more views
 
-Until then, keep looking which cluster you belong to.
+Until then, keep looking which cluster you belong to, if you owen a Credit Card.
