@@ -480,7 +480,7 @@ for c in data_model:
 ![Profiling of the final clusters](/images/clustering/facet_grid_2_8.PNG)
 ![Profiling of the final clusters](/images/clustering/facet_grid_2_9.PNG)
 ![Profiling of the final clusters](/images/clustering/facet_grid_2_10.PNG)
-![Profiling of the final cluster](/images/clustering/facet_grid_2_11.PNG)
+![Profiling of the final clusters](/images/clustering/facet_grid_2_11.PNG)
 
 As we can see from the above image, following is the profile of the 5 Clusters:
 
