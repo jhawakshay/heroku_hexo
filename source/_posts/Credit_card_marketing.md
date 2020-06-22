@@ -267,7 +267,7 @@ for c in data_model:
     g.map(plt.hist, c, color = "red")
 ```
 ![Seaborn FacetGrid for all the clusters](/images/clustering/Facet_grid_1_1.PNG)
-![Seaborn FacetGrid for all the clusters](/images/clustering/Facet_grid_1_2.PNG)
+![Seaborn FacetGrid for all the clusters](/images/clustering/facet_grid_1_2.PNG)
 ![Seaborn FacetGrid for all the clusters](/images/clustering/Facet_grid_1_3.PNG)
 
 
@@ -456,7 +456,9 @@ plotly.offline.iplot(fig, filename='mesh3d_sample')
 
 ```
 ![3-D Visualization with Plotly](/images/clustering/newplot.png)
-![3-D Visualization with Plotly](/images/clustering/ezgif.com-video-to-gif.gif)
+
+A GIF to show the clusters
+![3-D Visualization with Plotly from a GIF](/images/clustering/ezgif.com-video-to-gif.gif)
 
 With this image you won't be able to interact with the plot but in my github code (Link given at the end) you will be able to easily interact with the 3-D visualization. Plotly is so powerful!
 
