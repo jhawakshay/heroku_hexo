@@ -1,6 +1,6 @@
 ---
-title: The mother of all optimization algorithms
-date: 2020-08-1 21:58:47
+title: The mother of all optimization algorithms in Machine Learning
+date: 2019-08-1 21:58:47
 tags: [Gradient Descent, Optimization, Machine Learning]
 ---
 
@@ -13,11 +13,16 @@ The earlier you get the basics right, the better you will be able to optimize yo
 In this article, I am going to talk about three things:
 1. Theory of Gradient Descent
 1. Practical implementation of Gradient Descent
-1. What next if I understand and perfect the above two steps? Am I just giving gyaan or it can really help to be a better Data Scientist
+1. What next if I understand and perfect the above two steps? Am I just giving gyaan or it can really help to be a good Data Scientist
 
 Let's begin
 
 **Gradient Descent**
+Before beginning about Gradient Descent I would like to talk about Optimization. Optimization is needed for every real world problem so that if we are finding a solution, the solution not only has to solve the problem but it should be the best one maybe on metrics like Time, Cost, effectiveness. An optimizing solution in logistics could be Finding the best route from Point A to Point B which is what Google Maps does by optimizing time.
 
+In Machine Learning, Optimization is basically working on a solution that works the best on even the unseen data. We do this all over again by optimizing our solution on Training data and then checking on the unseen data (Test data).
+
+Coming back to Gradient Descent.
+Gradient Descent 
 
 
