@@ -23,6 +23,8 @@ Before beginning about Gradient Descent I would like to talk about Optimization.
 In Machine Learning, Optimization is basically working on a solution that works the best on even the unseen data. We do this all over again by optimizing our solution on Training data and then checking on the unseen data (Test data).
 
 Coming back to **Gradient Descent**
-Gradient Descent is an algorithm where we try to “walk” in a direction so the function decreases until we no-longer can. This is the most easy explanation in layman terms. Now, let's see it visually. Suppose, you are a stuntman and riding your bicycle in a **U** terrain.
+Gradient Descent is an algorithm where we try to “walk” in a direction so the function decreases until we no-longer can. This is the most easy explanation in layman terms. Now, let's see it visually. Suppose, there is a stuntman (GD as Gradient Descent) and riding your bicycle in a **U** terrain. He is finishing with his stunt and wants to reach to the safest (risk-free) point in the terrain
+
+There are three images which will help understand what I am talking about. In the first image, the stuntman GD is at the top of the terrain and he starts coming down. While the risk (Steepest) is the most at the top, the good part is that the risk (Steepness) is decreasing. So, he knows he is on the correct path to be risk-free.
 
 
