@@ -27,18 +27,18 @@ Gradient Descent is an algorithm where we try to “walk” in a direction so th
 
 There are three images which will help understand what I am talking about. In the first image, the stuntman GD is at the top of the terrain and he starts coming down. While the risk (Steepest) is the most at the top, the good part is that the risk (Steepness) is decreasing. So, he knows he is on the correct path to be risk-free.
 
-![Image1](/images/Gradient Descent/Pic1.png)
+![Image1](/images/GD/Pic1.png)
 
 Next, he reaches to the middle of the terrain but he still feels he is not totally risk-free. But he has again checked that this the right direction as the steepness has decreased a lot.
 
-![Image2](/images/Gradient Descent/Pic2.png)
+![Image2](/images/GD/Pic2.png)
 
 Finally, in the third image he reached to the point where he is has no risk (Steepness is zero) and the way he has achieved is through moving in the direction where the next step he takes, the steepness decreases. This is what Gradient Descent algorithms does, you reeach a point which has the lowest cost and there is no further movement in increase of cost and the point is known as the **Global Minimum**.
 
-![Image3](/images/Gradient Descent/Pic3.png)
+![Image3](/images/GD/Pic3.png)
 
 Reducing risk is just a simple analogy to reduce the cost of that function which is nothing but the derivate of the function with respect to parameters.
-![Image4](/images/Gradient Descent/Pic4.png)
+![Image4](/images/GD/Pic4.png)
 
 There are numerous mathematical notation for defining Global Minima but in simple definition Gradient Descent is an optimization algorithm used to minimize some function by iteratively moving in the direction of steepest descent as defined by the negative of the gradient. In machine learning, we use gradient descent to update the parameters of our model. These parameters could be Beta estimates and Intercept for a linear model (which is what we will implement) or could be weights of a neural net.
 
