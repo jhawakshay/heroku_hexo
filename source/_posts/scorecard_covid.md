@@ -1,6 +1,6 @@
 ---
 title: Developing and Calibrating Credit Risk Scorecards in COVID scenario
-date: 2019-12-29 21:58:47
+date: 2020-06-01 21:58:47
 tags: [Credit Risk Scorecards, Underwriting, Coronavirus]
 ---
 
