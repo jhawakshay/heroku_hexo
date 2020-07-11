@@ -1,9 +1,9 @@
-
 ---
 title: Developing and Calibrating Credit Risk Scorecards in COVID scenario
 date: 2019-12-29 21:58:47
 tags: [Credit Risk Scorecards, Underwriting, Coronavirus]
 ---
+
 ![](/images/scorecards/img7.png)
 
 The COVID-19 pandemic has impacted most of the countries in the world bringing economic activity to a standstill. The IMF has already warned that this pandemic will bring the ‘worst recession’ since the Great Depression in the 1930s, expecting a 3% reduction in global GDP in 2020. The IMF is now projecting India’s growth rate for FY21 to be 1.9%, down from 5.8% estimated in January (source: https://www.imf.org/en/Countries/IND).
