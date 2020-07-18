@@ -49,7 +49,22 @@ from sklearn.decomposition import PCA
 from lightgbm import LGBMClassifier
 from xgboost import XGBClassifier
 ```
+
 ### Oversampling of the Data
 ```python
 from imblearn.over_sampling import SMOTE
 ```
+
+### Deep learning framework
+Firstly you need to install tensorflow to be able to use keras, the deep learning framework. Also make sure that tensorflow version is above 2.2 else you won't be able to use keras. So, things to do before running the below codes:
+
+* pip install tensorflow 
+* import tensorflow as tf
+* pip install keras 
+
+```python
+from keras import models
+from keras import layers
+```
+
+
