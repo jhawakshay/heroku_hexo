@@ -399,7 +399,7 @@ rfc.fit(X_train_res, y_train_res)
 ```python
 train = model_fit_reports(algo =rfc ,X_ = X_train,y_ = y_train, performCV=True, printFeatureImportance=True, cv_folds=5)
 ```
-![Random Forest results on train Data](/images/Appl_score/Pic11 train RF.PNG)
+![Random Forest results on train Data](/images/Appl_score/Pic11trainRF.PNG)
 
 #### Result on the Test Data
 ```python
