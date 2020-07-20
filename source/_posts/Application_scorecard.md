@@ -399,14 +399,14 @@ rfc.fit(X_train_res, y_train_res)
 ```python
 train = model_fit_reports(algo =rfc ,X_ = X_train,y_ = y_train, performCV=True, printFeatureImportance=True, cv_folds=5)
 ```
-![Random Forest results on train Data](/images/Appl_score/Pic11trainRF.PNG)
-
+![](/images/Appl_score/Pic11trainRF.PNG)
+![Random Forest results on train Data](/images/Appl_score/Pic12trainRF.png)
 #### Result on the Test Data
 ```python
 test = model_fit_reports(algo =rfc ,X_ = X_test,y_ = y_test, performCV=True, printFeatureImportance=True, cv_folds=5)
 ```
-
-## Fig
+![](/images/Appl_score/Pic13testRF.PNG)
+![Random Forest results on train Data](/images/Appl_score/Pic14testRF.png)
 
 We see the Logistic Regression performs very poorly in comparison to Random Forest. Random Forest is performing decent when we see the Train Data Resuls but if you compare it with Test Data, it is a clear case of overfitting. We also know that Random Forest is prone to high variance or overfitting.
 
@@ -421,12 +421,14 @@ gbc.fit(X_train_res, y_train_res)
 ```python
 train = model_fit_reports(algo =gbc ,X_ = X_train,y_ = y_train, performCV=True, printFeatureImportance=False, cv_folds=5)
 ```
-
-## Fig
+![](/images/Appl_score/Pic15trainGBM.PNG)
+![GBM results on train Data](/images/Appl_score/Pic16trainGBM.png)
 
 ```python
 test = model_fit_reports(algo =gbc ,X_ = X_test,y_ = y_test, performCV=True, printFeatureImportance=False, cv_folds=5)
 ```
+![](/images/Appl_score/PicXGBtest.PNG)
+![GBM results on test Data](/images/Appl_score/Pic16trainGBM.png)
 
 #### Tuning the Gradient Boosting parameters
 
@@ -459,7 +461,7 @@ gsearch1.fit(X_train_res,y_train_res)
 ```python
 gsearch1.best_params_, gsearch1.best_score_
 ```
-## Fig
+![](/images/Appl_score/GBMtune1.PNG)
 
 ### Tuning Max_depth & min_samples_split
 ```python
@@ -472,6 +474,8 @@ gsearch2.fit(X_train_res,y_train_res)
 ```python
 gsearch2.best_params_, gsearch2.best_score_
 ```
+![](/images/Appl_score/GBMtune2.PNG)
+
 ### Tuning min_samples_split & min_samples_leaf
 
 ```python
@@ -484,6 +488,7 @@ gsearch3.fit(X_train_res,y_train_res)
 ```python
 gsearch3.best_params_, gsearch3.best_score_
 ```
+![](/images/Appl_score/GBMtune3.PNG)
 
 ### Tuning max_features
 ```python
@@ -495,6 +500,7 @@ gsearch4.fit(X_train_res,y_train_res)
 ```python
 gsearch4.best_params_, gsearch4.best_score_
 ```
+![](/images/Appl_score/GBMtune4.PNG)
 
 ### Tuning subsample
 ```python
@@ -506,6 +512,7 @@ gsearch5.fit(X_train_res,y_train_res)
 ```python
 gsearch5.best_params_, gsearch5.best_score_
 ```
+![](/images/Appl_score/GBMtune5.PNG)
 
 #### Combining all the tuned parameter values and runnning them as a whole
 ```python
@@ -516,16 +523,19 @@ gbc.fit(X_train_res, y_train_res)
 ```python
 train = model_fit_reports(gbc,X_train,y_train,performCV=True,printFeatureImportance=False, cv_folds=5)
 ```
-
-## Fig
+![](/images/Appl_score/FinalGBMtrain.PNG)
+![](/images/Appl_score/FinalGBMtrain1.png)
 
 As you can see there is a lift in GINI by around 5% from tuning the hyperparameters. So, in this case we have been able to reduce the bias from the model by increasing the lift in GINI
 
 ```python
 test = model_fit_reports(gbc,X_test,y_test,performCV=True,printFeatureImportance=False, cv_folds=5)
 ```
+![](/images/Appl_score/FinaltestGBM1.PNG)
+![](/images/Appl_score/FinaltestGBM2.png)
 
 ### XgBoost
+
 ```python
 xgb1 = XGBClassifier(
  learning_rate =0.001,
@@ -549,12 +559,14 @@ xgb1 = XGBClassifier(
  train = model_fit_reports(xgb1,X_train,y_train,performCV=True,printFeatureImportance=False, cv_folds=5)
  ```
  
- ## Fig
+![](/images/Appl_score/PicXGBTrain.PNG)
+![](/images/Appl_score/PicXGBTrain1.png)
  
  ```python
  test = model_fit_reports(xgb1,X_test,y_test,performCV=True,printFeatureImportance=False, cv_folds=5)
  ```
- ## Fig
+![](/images/Appl_score/PicXGBTest.PNG)
+![](/images/Appl_score/PicXgBTest1.png)
  
  #### Tuning XGboost
 
@@ -579,7 +591,7 @@ gsearch1.fit(X_train_res, y_train_res)
 ```python
 gsearch1.best_params_, gsearch1.best_score_
 ```
-## Fig
+![](/images/Appl_score/xgbtune1.PNG)
 
 ```python
 param_test2 = {
@@ -595,7 +607,7 @@ gsearch2.fit(X_train_res, y_train_res)
 ```python
 gsearch2.best_params_, gsearch2.best_score_
 ```
-## Fig
+![](/images/Appl_score/xgbtune2.PNG)
 
 ```python
 param_test3 = {
@@ -610,7 +622,7 @@ gsearch3.fit(X_train_res, y_train_res)
 ```python
 gsearch3.best_params_, gsearch3.best_score_
 ```
-## Fig
+![](/images/Appl_score/xgbtune3.PNG)
 
 ```python
 param_test6 = {
@@ -626,6 +638,7 @@ gsearch6.fit(X_train_res, y_train_res)
 ```python
 gsearch6.best_params_, gsearch6.best_score_
 ```
+![](/images/Appl_score/xgbtune4.PNG)
 
 ### Deep Learning
 
@@ -658,13 +671,13 @@ history = model.fit(X_train_res,
                    validation_data=(X_test,y_test))
 ```
 
-## Fig
+![](/images/Appl_score/Deepl.PNG)
 
 #### Finding the Accuracy score on the Test Data
 ```python
 score = model.evaluate(X_test, y_test)
 ```
-## Fig
+![](/images/Appl_score/accu.PNG)
 
 ```python
 #GINI & AUC 
@@ -676,7 +689,7 @@ Gini   = 2*roc_auc - 1
 print("The Gini of the Test model is ", Gini)
 ```
 
-## Fig
+![](/images/Appl_score/giniauc.PNG)
 
 ### ROC curve comparison on the Test Data
 
@@ -710,8 +723,7 @@ plt.legend()
 plt.show()
 
 ```
-
-## Fig
+![](/images/Appl_score/ROC.png)
 
 **Result** : As we clearly see that the Deep Learning model works best on the Test data. It has a AUC score of around 81% which is a good classifer score for a first-second cut version. We can definitely improve a lot on this by tuning our keras model 
 
@@ -751,7 +763,7 @@ Gini   = 2*roc_auc - 1
 print("The Gini of the overall model is: {:.2f}".format(Gini))
 ```
 
-## Fig
+![](/images/Appl_score/overallgini.PNG)
 
 ### Initializing the Score variable to predict the score
 
@@ -806,7 +818,7 @@ ax.set_ylabel("Count")
 ax.set_title("Score Distribution")
 ```
 
-## Score  Fig
+![](/images/Appl_score/score.png)
 
 ### Create Deciles and check default rate by score bands
 
@@ -839,10 +851,13 @@ plt.xlabel("Score", fontsize = 12)
 plt.ylabel("Default Rate", fontsize=12)
 ```
 
+![](/images/Appl_score/Defaultrates.png)
+
 **Result**: As can be seen above, there is no rank ordering break; which is basically the Default rate for low score buckets is not lower than the Default rate for high score bucket
 
 ```python
 Final_data     = pd.concat([df,combine_], axis=1)
 Final_data.head()
 ```
+![](/images/Appl_score/FinalScore.PNG)
 
