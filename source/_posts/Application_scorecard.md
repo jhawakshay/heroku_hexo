@@ -4,7 +4,7 @@ date: 2019-12-29 21:58:47
 tags: [Credit Risk, Application Socrecard, Deep Learning]
 ---
 
-## Develop a Risk Scorecard using Deep Learning and other ML algorithms
+
 
 ![A view of a Risk Score](/images/Appl_score/Scorecard.png)
 
@@ -560,13 +560,13 @@ xgb1 = XGBClassifier(
  ```
  
 ![](/images/Appl_score/PicXGBTrain.PNG)
-![](/images/Appl_score/PicXGBTrain1.png)
+![](/images/Appl_score/PicXgBTrain1.png)
  
  ```python
  test = model_fit_reports(xgb1,X_test,y_test,performCV=True,printFeatureImportance=False, cv_folds=5)
  ```
-![](/images/Appl_score/PicXGBTest.PNG)
-![](/images/Appl_score/PicXgBTest1.png)
+![](/images/Appl_score/PicXGBtest.PNG)
+![](/images/Appl_score/PicXgBtest1.png)
  
  #### Tuning XGboost
 
@@ -677,7 +677,7 @@ history = model.fit(X_train_res,
 ```python
 score = model.evaluate(X_test, y_test)
 ```
-![](/images/Appl_score/accu.PNG)
+![](/images/Appl_score/deeplresult.PNG)
 
 ```python
 #GINI & AUC 
@@ -689,7 +689,7 @@ Gini   = 2*roc_auc - 1
 print("The Gini of the Test model is ", Gini)
 ```
 
-![](/images/Appl_score/giniauc.PNG)
+![](/images/Appl_score/deeplresult1.PNG)
 
 ### ROC curve comparison on the Test Data
 
@@ -763,7 +763,7 @@ Gini   = 2*roc_auc - 1
 print("The Gini of the overall model is: {:.2f}".format(Gini))
 ```
 
-![](/images/Appl_score/overallgini.PNG)
+![](/images/Appl_score/deeplresult2.PNG)
 
 ### Initializing the Score variable to predict the score
 
@@ -818,7 +818,7 @@ ax.set_ylabel("Count")
 ax.set_title("Score Distribution")
 ```
 
-![](/images/Appl_score/score.png)
+![](/images/Appl_score/Score.png)
 
 ### Create Deciles and check default rate by score bands
 
