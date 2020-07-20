@@ -228,3 +228,613 @@ Some algorithms can work with categorical data directly. For example, a decision
 
 Below image clearly explains How one-hot encoding works:
 ![Undersampling and Oversampling](https://naadispeaks.files.wordpress.com/2018/04/mtimfxh.png?w=371&h=146)
+
+```python
+df = pd.get_dummies(df)
+df = df[[c for c in df if c not in ['SeriousDlqin2yrs']]+['SeriousDlqin2yrs']]
+df = df.drop(['Unnamed: 0'], axis=1)
+```
+
+### Checking for correlation 
+We will be checking for two type of correlations:
+* Correlation with the dependent variable to check which variable correlates better with the dependent variable
+* Correlations among different variables which is basically checking for mutli-collinearity
+
+This is the step where we reduce the variables and as a part of the feature engineering section. In our case, we are having a smaller number of variables but it is just a use case. Feature Engineering can really break or make the model.
+
+```python
+correlations = pd.DataFrame(df.corr()['SeriousDlqin2yrs'].sort_values())
+correlations = correlations.rename(columns = {'SeriousDlqin2yrs':'Correlation value'})
+```
+
+```
+correlations
+```
+
+## Fig
+
+```python
+correlations.plot(kind="bar", color="olive")
+```
+## Fig
+
+We see that that the correlation values are a little less across all the variables. None of the variables have a correlation of more than 0.5. The variable _NumberOfTime30-59DaysPastDueNotWorse_ has the highest correlation with the dependent variable
+
+### Correlation as heat map
+We will check here the multi-collinearity between all the variable and understand which variable can be removed to avoid any multi-collinearity in the model
+
+```python
+corr_ = df.corr()
+fig= plt.figure(figsize=(15,7))
+sns.heatmap(corr_, cmap = plt.cm.RdYlBu_r, vmin = -0.9, annot = True, vmax = 0.9)
+```
+
+## Fig
+
+**Results** : We see that variable; **NumberOfTime60-89DaysPastDueNotWorse**, **NumberOfTimes90DaysLate** & **NumberOfTime30-59DaysPastDueNotWorse** have a high correlation among themselves. To overcome the issue of multi-collinearity we can remove the two variables and keep only one of them. This is again a part of feature engineering. 
+
+Now, why did I choose the variable **NumberOfTime60-89DaysPastDueNotWorse**, **NumberOfTimes90DaysLate** to be removed as firstly the variable _NumberofTime90DaysLate_ is a collection related variable which is like heavily used when a person is not able to pay back the loan and the collection (team which collects back money) reaches the customer to force him to pay or else a legal action is taken against him
+
+```python
+#### Here we will drop variables to better our model
+df           = df.drop(['NumberOfTime60-89DaysPastDueNotWorse', 'NumberOfTimes90DaysLate'], axis=1)
+```
+
+#### Modelling
+
+```python
+X_train, X_test, y_train, y_test = train_test_split(df.drop(['SeriousDlqin2yrs'], axis=1), df['SeriousDlqin2yrs'], test_size=0.2,random_state = 72)
+```
+
+```python
+### Oversampling and Undersampling
+Since, we have already figured out that there is an unbalanced data, we will have to do a Oversampling and Undersampling. We will follow both the procedures and see which one we should follow to create a model
+```
+
+#### Oversmapling
+
+```python
+print("Before OverSampling, counts of label '1': {}".format(sum(y_train == 1))) 
+print("Before OverSampling, counts of label '0': {} \n".format(sum(y_train == 0))) 
+  
+sm = SMOTE(random_state = 2) 
+X_train_res, y_train_res = sm.fit_sample(X_train, y_train.ravel()) 
+  
+print('After OverSampling, the shape of train_X: {}'.format(X_train_res.shape)) 
+print('After OverSampling, the shape of train_y: {} \n'.format(y_train_res.shape)) 
+  
+print("After OverSampling, counts of label '1': {}".format(sum(y_train_res == 1))) 
+print("After OverSampling, counts of label '0': {}".format(sum(y_train_res == 0)))
+```
+
+## Fig
+
+### Function to measure the Model fit
+Below is the function which we will use to measure the fitness of the model. The function contains metrics like Accuracy, Precision, Recall and F1 Score. It also calcualtes the GINI and AUC of the model and throws us the Feature Importance as per the respective model (only if the particular Machine Learning algorithm allows to do so)
+
+```python
+def model_fit_reports(algo,X_,y_,performCV=True,printFeatureImportance=True, cv_folds=5):
+    
+    #Accuracy, Precision, Recall, F1 Score
+    pred = algo.predict(X_)
+    accu = accuracy_score(y_, pred)
+    f1_  = f1_score(y_, pred)
+    rec  = recall_score(y_, pred)
+    prec = precision_score(y_, pred)
+
+    
+    #GINI & AUC
+    fpr, tpr, thresholds = roc_curve(y_, pred)
+    roc_auc = auc(fpr, tpr)
+    Gini   = 2*roc_auc - 1   
+    labels  = ['Accuracy','F1 Score', 'Recall', 'Precision', 'Gini', 'AUC']
+    values  = [accu,f1_,rec,prec,Gini,roc_auc]
+    
+    all_    = pd.Series(values,labels)  
+    print(all_)
+    all_.plot(kind='bar', title='Model Fit Report')   
+
+
+    if performCV:
+        cv_score = cross_val_score(algo, X_, y_, cv=cv_folds, scoring='roc_auc')
+        GINI     = 2 * cv_score -1
+        print("AUC : Mean - %.7g | Std - %.7g | Min - %.7g | Max - %.7g" % (np.mean(cv_score),np.std(cv_score),np.min(cv_score),np.max(cv_score)))
+        print("GINI : Mean - %.7g | Std - %.7g | Min - %.7g | Max - %.7g" % (np.mean(GINI),np.std(GINI),np.min(GINI),np.max(GINI)))
+
+    cols = list(X_.columns)
+    if printFeatureImportance:
+        feat_imp = pd.Series(algo.feature_importances_, cols).sort_values(ascending=False)
+        feat_imp.plot(kind='bar', title='Feature Importances')
+        plt.ylabel('Feature Importance Score')    
+    
+    return all_
+```
+
+### Developing our model with various Algorithms
+We will be developing our model with various ML algorithms and compare it with Traditional Alogithms. Also, while it seems easy to tun these ML algos but it is quite tough optimize and tune such alogithms. In a classifier, we had to use some metrics on which basis we can tune and improve our classification. These metrics are:
+
+* Precision
+* Recall
+* F1 Score
+* GINI
+* AUC
+
+We will also run a CV to check if our results are consistent when measured on metrics like GINI or AUC
+
+### Logistic Regression
+
+```python
+regressor = LogisticRegression(random_state =2, solver='sag', max_iter = 10**2)
+regressor.fit(X_train_res, y_train_res)
+```
+
+#### Result on Train data
+```python
+train = model_fit_reports(algo =regressor ,X_ = X_train,y_ = y_train, performCV=True, printFeatureImportance=False, cv_folds=5)
+```
+
+#### Result on Test data
+```python
+test  = model_fit_reports(algo =regressor ,X_ = X_test,y_ = y_test, performCV=True, printFeatureImportance=False, cv_folds=5)
+```
+
+## Fig
+
+### Random Forest
+```python
+rfc = RandomForestClassifier(random_state=8, n_estimators=500)
+rfc.fit(X_train_res, y_train_res)
+```
+
+#### Result on the Train Data
+```python
+train = model_fit_reports(algo =rfc ,X_ = X_train,y_ = y_train, performCV=True, printFeatureImportance=True, cv_folds=5)
+```
+
+## Fig
+
+#### Result on the Test Data
+```python
+test = model_fit_reports(algo =rfc ,X_ = X_test,y_ = y_test, performCV=True, printFeatureImportance=True, cv_folds=5)
+```
+
+## Fig
+
+We see the Logistic Regression performs very poorly in comparison to Random Forest. Random Forest is performing decent when we see the Train Data Resuls but if you compare it with Test Data, it is a clear case of overfitting. We also know that Random Forest is prone to high variance or overfitting.
+
+Now, we can't use Random Forest as our go to metric because of this reason. We have to go for boosting algorithms which are not prone to overfitting and uses a different technique
+
+### Gradient Boosting
+```python
+gbc = GradientBoostingClassifier()
+gbc.fit(X_train_res, y_train_res)
+```
+
+```python
+train = model_fit_reports(algo =gbc ,X_ = X_train,y_ = y_train, performCV=True, printFeatureImportance=False, cv_folds=5)
+```
+
+## Fig
+
+```python
+test = model_fit_reports(algo =gbc ,X_ = X_test,y_ = y_test, performCV=True, printFeatureImportance=False, cv_folds=5)
+```
+
+#### Tuning the Gradient Boosting parameters
+
+We will be tuning the various hyperparameters of Gradient Boosting to improve our first cut results. The below image shows you what are the different pararmeters:
+
+* **n_estimators** : The number of sequential trees to be modeled. Though GBM is fairly robust at higher number of trees but it can still overfit at a point. Hence, this should be tuned using CV for a particular learning rate.
+
+* **max_depth** : This is the number of maximum depth of the tree. Used to control over-fitting as higher depth will allow model to learn relations very specific to a particular sample
+
+* **min_samples_split** : This is the minimum number of samples (or observations) which are required in a node to be considered for splitting.
+
+* **min_samples_leaf** : This is the minimum samples (rows or observations) required in a terminal node or leaf
+
+* **max_features** : The number of features to be considered while searching for the best split. A random selection is done when we fix the number of features to avoid any bias. Higher values can lead to over-fitting
+
+* **subsample** : The fraction of observations to be selected for each tree. Selection is done by random sampling.
+
+### Tuning n_estimators
+```python
+param_test1 = {'n_estimators':range(20,81,10)}
+gsearch1    = GridSearchCV(estimator = GradientBoostingClassifier(learning_rate=0.1, 
+                                                               min_samples_split=500,
+                                                               min_samples_leaf=50,
+                                                               max_depth=8,max_features='sqrt',subsample=0.8,random_state=10), 
+                                                               param_grid = param_test1, scoring='roc_auc',
+                                                               n_jobs=4,iid=False, cv=5)
+
+gsearch1.fit(X_train_res,y_train_res)
+```
+```python
+gsearch1.best_params_, gsearch1.best_score_
+```
+## Fig
+
+### Tuning Max_depth & min_samples_split
+```python
+param_test2 = {'max_depth':range(5,16,2), 'min_samples_split':range(200,400,600)}
+gsearch2 = GridSearchCV(estimator = GradientBoostingClassifier(learning_rate=0.1, n_estimators=80, max_features='sqrt', subsample=0.8, random_state=10), 
+param_grid = param_test2, scoring='roc_auc',n_jobs=4,iid=False, cv=5)
+
+gsearch2.fit(X_train_res,y_train_res)
+```
+```python
+gsearch2.best_params_, gsearch2.best_score_
+```
+### Tuning min_samples_split & min_samples_leaf
+
+```python
+param_test3 = {'min_samples_split':range(1000,2100,200), 'min_samples_leaf':range(30,71,10)}
+
+gsearch3 = GridSearchCV(estimator = GradientBoostingClassifier(learning_rate=0.1, n_estimators=80,max_depth=15,max_features='sqrt', subsample=0.8, random_state=10), 
+param_grid = param_test3, scoring='roc_auc',n_jobs=4,iid=False, cv=5)
+gsearch3.fit(X_train_res,y_train_res)
+```
+```python
+gsearch3.best_params_, gsearch3.best_score_
+```
+
+### Tuning max_features
+```python
+param_test4 = {'max_features':range(7,20,2)}
+gsearch4 = GridSearchCV(estimator = GradientBoostingClassifier(learning_rate=0.1, n_estimators=80,max_depth=15, min_samples_split=1000, min_samples_leaf=30, subsample=0.8, random_state=10),
+param_grid = param_test4, scoring='roc_auc',n_jobs=4,iid=False, cv=5)
+gsearch4.fit(X_train_res,y_train_res)
+```
+```python
+gsearch4.best_params_, gsearch4.best_score_
+```
+
+### Tuning subsample
+```python
+param_test5 = {'subsample':[0.6,0.7,0.75,0.8,0.85,0.9]}
+gsearch5 = GridSearchCV(estimator = GradientBoostingClassifier(learning_rate=0.1, n_estimators=80, max_depth= 15, min_samples_split= 1000, min_samples_leaf=30,max_features=7, random_state = 10),
+param_grid = param_test5, scoring='roc_auc',n_jobs=4,iid=False, cv=5)
+gsearch5.fit(X_train_res,y_train_res)
+```
+```python
+gsearch5.best_params_, gsearch5.best_score_
+```
+
+#### Combining all the tuned parameter values and runnning them as a whole
+```python
+gbc = GradientBoostingClassifier(n_estimators=80, max_depth= 15, min_samples_split= 1000, min_samples_leaf=30,subsample=0.9,max_features=7)
+gbc.fit(X_train_res, y_train_res)
+```
+
+```python
+train = model_fit_reports(gbc,X_train,y_train,performCV=True,printFeatureImportance=False, cv_folds=5)
+```
+
+## Fig
+
+As you can see there is a lift in GINI by around 5% from tuning the hyperparameters. So, in this case we have been able to reduce the bias from the model by increasing the lift in GINI
+
+```python
+test = model_fit_reports(gbc,X_test,y_test,performCV=True,printFeatureImportance=False, cv_folds=5)
+```
+
+### XgBoost
+```python
+xgb1 = XGBClassifier(
+ learning_rate =0.001,
+ n_estimators=1000,
+ max_depth=9,
+ min_child_weight=1,
+ gamma=0.2,
+ subsample=0.8,
+ colsample_bytree=0.8,
+ objective= 'binary:logistic',
+ nthread=4,
+ reg_alpha = 0.1,
+ scale_pos_weight=1,
+ seed=27)
+ ```
+ ```python
+ xgb1.fit(X_train_res, y_train_res)
+ ```
+ 
+ ```python
+ train = model_fit_reports(xgb1,X_train,y_train,performCV=True,printFeatureImportance=False, cv_folds=5)
+ ```
+ 
+ ## Fig
+ 
+ ```python
+ test = model_fit_reports(xgb1,X_test,y_test,performCV=True,printFeatureImportance=False, cv_folds=5)
+ ```
+ ## Fig
+ 
+ #### Tuning XGboost
+
+We will be tuning some of the hyperparameters of XgBoost:
+
+* **max_depth**: The maximum depth of a tree
+* **min_child_weight**: It is the minimum sum of weights of all observations required in a child
+* **gamma**: A node is split only when the resulting split gives a positive reduction in the loss function. Gamma specifies the minimum loss reduction required to make a split
+* **subsample**: Denotes the fraction of observations to be randomly samples for each tree
+
+```python
+param_test1 = {
+ 'max_depth':range(3,10,2),
+ 'min_child_weight':range(1,6,2)
+}
+gsearch1 = GridSearchCV(estimator = XGBClassifier( learning_rate =0.1, n_estimators=140, max_depth=5,
+ min_child_weight=1, gamma=0, subsample=0.8, colsample_bytree=0.8,
+ objective= 'binary:logistic', nthread=4, scale_pos_weight=1, seed=27), 
+ param_grid = param_test1, scoring='roc_auc',n_jobs=4,iid=False, cv=5)
+gsearch1.fit(X_train_res, y_train_res)
+```
+```python
+gsearch1.best_params_, gsearch1.best_score_
+```
+## Fig
+
+```python
+param_test2 = {
+ 'max_depth':[4,5,6],
+ 'min_child_weight':[4,5,6]
+}
+gsearch2 = GridSearchCV(estimator = XGBClassifier( learning_rate=0.1, n_estimators=140, max_depth=5,
+ min_child_weight=2, gamma=0, subsample=0.8, colsample_bytree=0.8,
+ objective= 'binary:logistic', nthread=4, scale_pos_weight=1,seed=27), 
+ param_grid = param_test2, scoring='roc_auc',n_jobs=4,iid=False, cv=5)
+gsearch2.fit(X_train_res, y_train_res)
+```
+```python
+gsearch2.best_params_, gsearch2.best_score_
+```
+## Fig
+
+```python
+param_test3 = {
+ 'gamma':[i/10.0 for i in range(0,5)]
+}
+gsearch3 = GridSearchCV(estimator = XGBClassifier( learning_rate =0.1, n_estimators=140, max_depth=9,
+ min_child_weight=2, gamma=0, subsample=0.8, colsample_bytree=0.8,
+ objective= 'binary:logistic', nthread=4, scale_pos_weight=1,seed=27), 
+ param_grid = param_test3, scoring='roc_auc',n_jobs=4,iid=False, cv=5)
+gsearch3.fit(X_train_res, y_train_res)
+```
+```python
+gsearch3.best_params_, gsearch3.best_score_
+```
+## Fig
+
+```python
+param_test6 = {
+ 'reg_alpha':[1e-5, 1e-2, 0.1, 1, 100]
+}
+gsearch6 = GridSearchCV(estimator = XGBClassifier( learning_rate =0.1, n_estimators=177, max_depth=5,
+ min_child_weight=1, gamma=0.2, subsample=0.8, colsample_bytree=0.8,
+ objective= 'binary:logistic', nthread=4, scale_pos_weight=1,seed=27), 
+ param_grid = param_test6, scoring='roc_auc',n_jobs=4,iid=False, cv=5)
+
+gsearch6.fit(X_train_res, y_train_res)
+```
+```python
+gsearch6.best_params_, gsearch6.best_score_
+```
+
+### Deep Learning
+
+KERAS is an Open Source Neural Network library written in Python that runs on top of Theano or Tensorflow. Keras doesn't handle low-level computation. Instead, it uses another library to do it, called the "Backend. So Keras is high-level API wrapper for the low-level API, capable of running on top of TensorFlow, CNTK, or Theano.
+
+Keras High-Level API handles the way we make models, defining layers, or set up multiple input-output models. In this level, Keras also compiles our model with loss and optimizer functions, training process with fit function. Keras doesn't handle Low-Level API such as making the computational graph, making tensors or other variables because it has been handled by the "backend" engine.
+
+We will be using deep learning to predict the default. Deep Learning an Advanced ML algorithm that uses the power of Neural Netowrks.
+
+#### Run deep learning using keras
+```python
+n_inputs = X_train_res.shape[1]
+
+model = models.Sequential()
+model.add(layers.Dense(16, activation ='relu', input_shape =(n_inputs, )))
+model.add(layers.Dense(32,activation = 'relu'))
+model.add(layers.Dense(1,activation ='sigmoid'))
+```
+
+```python
+model.compile(optimizer = 'rmsprop',
+             loss= 'binary_crossentropy',
+             metrics = ['accuracy'])
+```
+```python
+history = model.fit(X_train_res,
+                   y_train_res,
+                   epochs=150,
+                   batch_size=512,
+                   validation_data=(X_test,y_test))
+```
+
+## Fig
+
+#### Finding the Accuracy score on the Test Data
+```python
+score = model.evaluate(X_test, y_test)
+```
+## Fig
+
+```python
+#GINI & AUC 
+pred  = model.predict(X_test)
+fpr, tpr, thresholds = roc_curve(y_test, pred)
+roc_auc = auc(fpr, tpr)
+print("The AUC of the Test model is ", roc_auc)
+Gini   = 2*roc_auc - 1
+print("The Gini of the Test model is ", Gini)
+```
+
+## Fig
+
+### ROC curve comparison on the Test Data
+
+```python
+log_pred                   = regressor.predict(X_test)
+rfc_pred                       = rfc.predict(X_test)
+gbm_pred                       = gbc.predict(X_test)
+xgb_pred                       = xgb1.predict(X_test)
+deepl_pred                     = model.predict(X_test)
+
+log_fpr, log_tpr, log_threshold   = roc_curve(y_test, log_pred)
+rfc_fpr, rfc_tpr, rfc_threshold   = roc_curve(y_test, rfc_pred)
+gbm_fpr, gbm_tpr, gbm_threshold   = roc_curve(y_test, gbm_pred)
+xgb_fpr, xgb_tpr, xgb_threshold   = roc_curve(y_test, xgb_pred)
+deepl_fpr, deepl_tpr, deepl_threshold   = roc_curve(y_test, deepl_pred)
+
+# Plot ROC curves
+fig  = plt.figure(figsize=(10,6))
+plt.title('ROC Curve \n Comparison of Classifiers')
+plt.plot(log_fpr, log_tpr, label ='Logistic Regression AUC: {:.2f}'.format(roc_auc_score(y_test, log_pred)))
+plt.plot(rfc_fpr, rfc_tpr, label ='Random Forest AUC: {:.2f}'.format(roc_auc_score(y_test, rfc_pred)))
+plt.plot(gbm_fpr, gbm_tpr, label ='GBM AUC: {:.2f}'.format(roc_auc_score(y_test, gbm_pred)))
+plt.plot(xgb_fpr, xgb_tpr, label ='XgBoost AUC: {:.2f}'.format(roc_auc_score(y_test, xgb_pred)))
+plt.plot(deepl_fpr, deepl_tpr, label ='Deep Learning AUC: {:.2f}'.format(roc_auc_score(y_test, deepl_pred)))
+
+plt.plot([0, 1], ls="--")
+plt.plot([0, 0], [1, 0] , c=".7"), plt.plot([1, 1] , c=".7")
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+plt.legend()
+plt.show()
+
+```
+
+## Fig
+
+**Result** : As we clearly see that the Deep Learning model works best on the Test data. It has a AUC score of around 81% which is a good classifer score for a first-second cut version. We can definitely improve a lot on this by tuning our keras model 
+
+### Creating a Score from Probability
+
+Next we have is how do we consume these probabilities. Since, predicting a default is under a Credit Risk team of a Bank, we need to provide these probabilities into a more consumable format which will be like a Score; something similar to a FICO Score or a CIBIL Score or a Experian Score. These are all the Buereau Score on which basis one can predict the likeliness of a person not paying back the loan.
+
+We will also convert this probability into our internal Bank Score which will be used to give away loan once a customer applies for the same. This is called as an Application Score basis the information provided by the customer.
+
+Some of the terms which will be used are:
+* **Base Score**: This is the score on which we will start for each customer and then add/subtract points (absolute value) basis his probability to default (predicted). 
+
+* **pdo**(Points to Double the odds): These are the points by which odds will be doubled. Odds here are (Good/Bads) ratio. For example, suppose at a score of 620, the odds ratio is 300/100 (3) and now if pdo is 100 then at a score of 720, the odds ratio will be 6.
+
+* **Goods/Bads**: This is the initial Goods/Bads ratio to be taken
+
+### Predict the probability for the full dataset with the Deep Learning Model
+
+We will use the Deep Learning model to predict the probability for all the customer. We have also tested our model on the KPIs like GINI and AUC.
+
+```python
+## Predict for the whole of the dataset
+actual_   = df['SeriousDlqin2yrs']
+df_new    = df.copy()
+df_new    = df.drop(['SeriousDlqin2yrs'], axis=1)
+```
+
+```python
+pred_all  = model.predict(df_new)
+```
+
+```python
+fpr, tpr, thresholds = roc_curve(actual_, pred_all)
+roc_auc = auc(fpr, tpr)
+print("The AUC of the overall model is: {:.2f}".format(roc_auc))
+Gini   = 2*roc_auc - 1
+print("The Gini of the overall model is: {:.2f}".format(Gini))
+```
+
+## Fig
+
+### Initializing the Score variable to predict the score
+
+```python
+## Convert the probability into a score
+Base_Score = 600
+pdo        = 120
+Good_Bads  = 10
+
+## Creating a function to calculate a Score
+def score_(x, Offset, Factor):
+    score_ = Offset - Factor * np.log(x)
+    return score_
+```
+
+```python
+Factor          = pdo/np.log(2)
+Offset          = Base_Score - Factor * np.log(Good_Bads)
+Score_          = score_(pred_all, Offset=Offset, Factor=Factor)
+```
+
+```python
+Actual_vals      = pd.DataFrame(actual_).reset_index(drop=True)
+Score            = pd.DataFrame(Score_)
+pred_all         = pd.DataFrame(pred_all)
+combine          = [Actual_vals,pred_all, Score]
+combine_         = pd.concat(combine, axis=1)
+```
+
+```python
+combine_.columns  = ['Default', 'Predicted_prob', 'Risk_Score']
+```
+
+```python
+combine_              = combine_.replace([np.inf, -np.inf], np.nan)
+combine_              = combine_[combine_.isna()==False]
+```
+#### We will cap the Score to 900 as some of the customers have a Probability of almost equal to zero which is there is almost no chance they will miss any loan payments
+
+```python
+combine_.loc[(combine_.Risk_Score>900), ['Risk_Score']] = 899
+```
+
+```python
+fig = plt.figure(figsize = (5,5))
+ax = sns.distplot(combine_['Risk_Score'], hist=True, kde=True,
+                        bins=100, color = 'blue',hist_kws={'edgecolor':'black'},
+                         kde_kws={'linewidth': 4})
+
+ax.set_xlabel("Application Score")
+ax.set_ylabel("Count")
+ax.set_title("Score Distribution")
+```
+
+## Score  Fig
+
+### Create Deciles and check default rate by score bands
+
+This is an idea exercise which every Credit Risk Manager does to understand if the scores created by him is rank ordering as per the actual defaults. We would create 10 groups in the Score we have created and then check the overall defauls and default rates in that particular Score Band
+
+```python
+max_                         = max(combine_['Risk_Score'])
+min_                         = min(combine_['Risk_Score'])
+combine_['Score_decile']     = pd.cut(combine_['Risk_Score'], bins=[min_,300,415,490,555,600,690,730,max_],labels = [min_,300,415,490,555,600,690,730], include_lowest= True)
+```
+
+```python
+no_of_defaults                = combine_.groupby('Score_decile', as_index=False).agg({'Default':'sum', 'Predicted_prob':'count'})
+```
+
+```python
+no_of_defaults['default_rate'] = (no_of_defaults['Default']/no_of_defaults['Predicted_prob'] * 100)
+no_of_defaults['Score_decile'] = round(no_of_defaults['Score_decile'],0)
+```
+
+```python
+no_of_defaults
+```
+
+```python
+fig = plt.figure(figsize = (8,6))
+plt.plot(no_of_defaults['Score_decile'], no_of_defaults['default_rate'], color = 'c')
+plt.title("Default Rates across Score Range", fontsize = 15)
+plt.xlabel("Score", fontsize = 12)
+plt.ylabel("Default Rate", fontsize=12)
+```
+
+**Result**: As can be seen above, there is no rank ordering break; which is basically the Default rate for low score buckets is not lower than the Default rate for high score bucket
+
+```python
+Final_data     = pd.concat([df,combine_], axis=1)
+Final_data.head()
+```
+
