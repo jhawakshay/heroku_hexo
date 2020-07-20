@@ -5,7 +5,8 @@ tags: [Credit Risk, Application Socrecard, Deep Learning]
 ---
 
 ## Develop a Risk Scorecard using Deep Learning and other ML algorithms
-![Confusion matrix](/images/Appl_score/Scorecard.png)
+
+![A view of a Risk Score](/images/Appl_score/Scorecard.png)
 
 In the below article I will be taking you through the end to end process of developing a Credit Risk Scorecards. These scorecards are typically used by the Underwriting team of a Bank who takes this score to access the Risk attached to a person. Whenever you apply for a loan, a bank calcualtes a risk attached to you in terms of a Score. There are three major types of Scores in the Industry: A, B, C.
 
@@ -150,7 +151,7 @@ miss = missing_vals(data_)
 miss
 ```
 
-![Missing values](/images/Appl_score/Pic2.png)
+![Missing values](/images/Appl_score/Pic2.PNG)
 
 **Conclusion**: We see that there are very less missing values in two of the columns. Then also, we will be replacing the missing values with mean. Missing value treatment is another area which has so many options but the quickest is replacing it by mean or median (when the missing percentage is really less)
 
@@ -161,7 +162,7 @@ We start with the Descriptive statistics by checking the basic statistics of the
 data_.describe()
 ```
 
-![Descriptive Statistics](/images/Appl_score/Pic3.png)
+![Descriptive Statistics](/images/Appl_score/Pic3.PNG)
 
 ```python
 cols = list(data_.columns)
@@ -179,6 +180,8 @@ for i in range(0, len(cols)):
 
 plt.tight_layout()
 ```
+![Histograms](/images/Appl_score/Pic4.png)
+
 #### Replace the missings with the mean
 
 ```python
@@ -227,6 +230,7 @@ ax.legend()
 plt.title('Plot showing Defaults and Non-Defaults')
 plt.show()
 ```
+![](/images/Appl_score/Pic5.png)
 
 ### Now doing the one-hot encoding
 One hot encoding is a process by which categorical variables are converted into a form that could be provided to ML algorithms to do a better job in prediction
@@ -257,13 +261,12 @@ correlations = correlations.rename(columns = {'SeriousDlqin2yrs':'Correlation va
 ```
 correlations
 ```
-
-## Fig
+![Correlation Table](/images/Appl_score/Pic6.png)
 
 ```python
 correlations.plot(kind="bar", color="olive")
 ```
-## Fig
+![Correlation Plot](/images/Appl_score/Pic7.png)
 
 We see that that the correlation values are a little less across all the variables. None of the variables have a correlation of more than 0.5. The variable _NumberOfTime30-59DaysPastDueNotWorse_ has the highest correlation with the dependent variable
 
@@ -276,7 +279,7 @@ fig= plt.figure(figsize=(15,7))
 sns.heatmap(corr_, cmap = plt.cm.RdYlBu_r, vmin = -0.9, annot = True, vmax = 0.9)
 ```
 
-## Fig
+![Correlation Heatmap](/images/Appl_score/Pic8.png)
 
 **Results** : We see that variable; **NumberOfTime60-89DaysPastDueNotWorse**, **NumberOfTimes90DaysLate** & **NumberOfTime30-59DaysPastDueNotWorse** have a high correlation among themselves. To overcome the issue of multi-collinearity we can remove the two variables and keep only one of them. This is again a part of feature engineering. 
 
@@ -314,7 +317,7 @@ print("After OverSampling, counts of label '1': {}".format(sum(y_train_res == 1)
 print("After OverSampling, counts of label '0': {}".format(sum(y_train_res == 0)))
 ```
 
-## Fig
+![Oversampling](/images/Appl_score/Pic9.PNG)
 
 ### Function to measure the Model fit
 Below is the function which we will use to measure the fitness of the model. The function contains metrics like Accuracy, Precision, Recall and F1 Score. It also calcualtes the GINI and AUC of the model and throws us the Feature Importance as per the respective model (only if the particular Machine Learning algorithm allows to do so)
@@ -384,8 +387,7 @@ train = model_fit_reports(algo =regressor ,X_ = X_train,y_ = y_train, performCV=
 ```python
 test  = model_fit_reports(algo =regressor ,X_ = X_test,y_ = y_test, performCV=True, printFeatureImportance=False, cv_folds=5)
 ```
-
-## Fig
+![Logistic Regression results on test Data](/images/Appl_score/Pic10.PNG)
 
 ### Random Forest
 ```python
@@ -397,8 +399,7 @@ rfc.fit(X_train_res, y_train_res)
 ```python
 train = model_fit_reports(algo =rfc ,X_ = X_train,y_ = y_train, performCV=True, printFeatureImportance=True, cv_folds=5)
 ```
-
-## Fig
+![Random Forest results on train Data](/images/Appl_score/Pic11 train RF.PNG)
 
 #### Result on the Test Data
 ```python
