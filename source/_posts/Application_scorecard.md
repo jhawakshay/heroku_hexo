@@ -5,8 +5,15 @@ tags: [Credit Risk, Application Socrecard, Deep Learning]
 ---
 
 ## Develop a Risk Scorecard using Deep Learning and other ML algorithms
+![Confusion matrix](/images/Appl_score/Scorecard.png)
 
-In the below article I will be taking you through the end to end process of developing a Credit Risk Scorecards. These scorecards are typically used by the Underwriting team of a Bank who takes this score to access the Risk attached to a person. By Risk, what I mean is what is the probability that the person can default on the loan given.
+In the below article I will be taking you through the end to end process of developing a Credit Risk Scorecards. These scorecards are typically used by the Underwriting team of a Bank who takes this score to access the Risk attached to a person. Whenever you apply for a loan, a bank calcualtes a risk attached to you in terms of a Score. There are three major types of Scores in the Industry: A, B, C.
+
+* Application Score
+* Behaviour Score
+* Collection Score
+
+By Risk, what I mean is what is the probability that the person can default on the loan given.
 
 Let's start the process!
 
@@ -108,7 +115,7 @@ plt. title("Percentage of Defaults and Non-Defaults")
 plt.show()
 ```
 
-## Figure 1
+![Bifercation of Defaults and Non-Defaults](/images/Appl_score/Pic1.png)
 
 ### Exploratory Data Analysis (EDA)
 These will be the steps we will follow before trying to develop any model out of the model:
@@ -143,7 +150,7 @@ miss = missing_vals(data_)
 miss
 ```
 
-## Fig2
+![Missing values](/images/Appl_score/Pic2.png)
 
 **Conclusion**: We see that there are very less missing values in two of the columns. Then also, we will be replacing the missing values with mean. Missing value treatment is another area which has so many options but the quickest is replacing it by mean or median (when the missing percentage is really less)
 
@@ -154,7 +161,7 @@ We start with the Descriptive statistics by checking the basic statistics of the
 data_.describe()
 ```
 
-## Fig3
+![Descriptive Statistics](/images/Appl_score/Pic3.png)
 
 ```python
 cols = list(data_.columns)
