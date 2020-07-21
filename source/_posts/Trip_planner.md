@@ -1,5 +1,5 @@
 ---
-title: Trip Planner and Map visulaization using RShiny
+title: Trip Planner and Map visualization using RShiny
 date: 2019-11-12 21:58:47
 tags: [R Shiny, Data Visualization,Tourism, Trips]
 ---
