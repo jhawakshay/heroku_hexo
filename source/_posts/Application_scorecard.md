@@ -1,6 +1,6 @@
 ---
 title: Application Scorecard using Deep Learning
-date: 2020-01-19 21:58:47
+date: 2020-05-19 21:58:47
 tags: [Credit Risk, Application Socrecard, Deep Learning]
 ---
 
