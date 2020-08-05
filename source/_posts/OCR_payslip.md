@@ -16,7 +16,7 @@ I am going to introduce some lines on what is OCR and Pytesseract?
 It is widely used in database management in Banking, Passports, Medical field. For banking, it is used in getting the Bank Statements, Payslips, Mini Statements, Transactions from passbook etc.
 
 Below image will help you to understand what OCR does?
-![OCR]](/images/OCR/OCR.jpg)
+![OCR](/images/OCR/OCR.jpg)
 
 OCR as a process generally consists of several sub-processes to perform as accurately as possible. It involves:
 * Preprocessing of the image
@@ -110,10 +110,10 @@ save_images(pil_images)
 ```python
 text = pytesseract.image_to_string(Image.open('page_1.jpg'))
 ```
-
 ```python
 text 
 ```
+![](/images/OCR/Img17.PNG)
 
 ### Text using NLP and parsing
 We will be using text parsing and NLP to extract the unstructured text into meaning full arrays and tables.
@@ -123,6 +123,7 @@ The objective is to get all the details of a person on his payslip
 ```python
 text_no_space = text.replace('\n', '')
 ```
+![](/images/OCR/Img18.PNG)
 
 We will now exract the required details from the payslip.
 ```python
@@ -130,12 +131,15 @@ We will now exract the required details from the payslip.
 type_    = text_no_space[0:8]
 print(type_)
 ```
+![](/images/OCR/Img1.PNG)
+
 ```python
 pattern  = re.compile(r'Pay.Slip', re.IGNORECASE)
 matches  = pattern.finditer(text_no_space)
 for match in matches:
     print(match)
 ```
+![](/images/OCR/Img2.PNG)
 
 ### Organization & City Name
 
@@ -144,6 +148,7 @@ Generally, after the first occurence of the Pay Slip it contains the Organizatio
 Org_name   = text_no_space[9:100]
 print(Org_name)
 ```
+![](/images/OCR/Img3.PNG)
 
 ```python
 pattern  = re.compile(r',', re.IGNORECASE)
@@ -151,6 +156,7 @@ matches  = pattern.finditer(Org_name)
 for match in matches:
     print(match)
 ```
+![](/images/OCR/Img4.PNG)
 
 ```python
 Org_  = Org_name[6:34]
@@ -158,10 +164,12 @@ print(Org_)
 City  = Org_name[36:45]
 print(City)
 ```
+![](/images/OCR/Img5.PNG)
 
 ```python
 Org_name[6:match.start()]
 ```
+![](/images/OCR/Img6.PNG)
 
 ### Salary Month & Year
 
@@ -174,7 +182,7 @@ matches  = pattern.finditer(text_no_space)
 for match in matches:
     print(match)
 ```
-
+![](/images/OCR/Img7.PNG)
 ### Salary of the Year is the first thing on the top of the payslip so it should be 2008
 ```python
 Year_    = text_no_space[85:89]
@@ -186,13 +194,11 @@ pattern  = re.compile(r'(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Ju
 matches  = pattern.finditer(text_no_space)
 for match in matches:
     print(match)
-    
 ```
-
-```python
+![](/images/OCR/Img8.PNG)
 ### Here also we would find that the month of the salary is in the first occurence.
 ### The other things asked could be just a cumulative salary description in the Payslip
-
+```python
 month_   = text_no_space[80:83]
 print(month_)
 ```
@@ -211,5 +217,94 @@ print(DoB_)
 DoJ_      = text_no_space[174:184]
 print(DoJ_)
 ```
+![](/images/OCR/Img9.PNG)
 
+```python
+pattern  = re.compile(r'(Employee|Emp) Name', re.IGNORECASE)
+matches  = pattern.finditer(text_no_space)
+for match in matches:
+    print(match)
+```
+![](/images/OCR/Img10.PNG)
 
+```python
+emp_name_    = text_no_space[144:157]
+print(emp_name_)
+```
+![](/images/OCR/Img11.PNG)
+
+```python
+pattern  = re.compile(r'(Mr|Mrs|Miss|Ms)\.?\s[a-zA-Z]\w*\s[a-zA-Z]\w*', re.IGNORECASE)
+matches  = pattern.finditer(text_no_space)
+for match in matches:
+    print(match)
+```
+![](/images/OCR/Img12.PNG)
+
+```python
+father_name   = text_no_space[224:238]
+print(father_name)
+mother_name   = text_no_space[246:262]
+print(mother_name)
+```
+![](/images/OCR/Img13.PNG)
+
+### Designation
+```python
+pattern  = re.compile(r'Designation\s[a-zA-Z]\w*\s[a-zA-Z]\w*', re.IGNORECASE)
+matches  = pattern.finditer(text_no_space)
+for match in matches:
+    print(match)
+```
+
+```python
+designation  = text_no_space[392:405]
+print(designation)   
+```
+![](/images/OCR/Img14.PNG)
+### Salary
+
+```python
+pattern  = re.compile(r'(Salary|Pay|Sal):\s[0-9]\d*', re.IGNORECASE)
+matches  = pattern.finditer(text_no_space)
+for match in matches:
+    print(match)
+    
+Salary_  =  text_no_space[559:564]
+print(Salary_)
+```
+![](/images/OCR/Img15.PNG)
+
+### Creating a Dictionary of all the details extracted from pdf
+```python
+dict_  = {
+    'Type':type_,
+    'Organization':Org_,
+    'City':City,
+    'Year':Year_,
+    'Month': month_,
+    'Employee Name': emp_name_,
+    'Date of Birth': DoB_,
+    'Date of Joining': DoJ_,
+    'Designation':designation,
+    'Father Name':father_name,
+    'Mother Name':mother_name,
+    'Salary After Deductions':Salary_
+    
+}
+```
+
+```python
+dict_
+```
+![](/images/OCR/Img16.PNG)
+
+As you can see we have extracted the important details from the Payslip and this can be converted into a dataframe.
+
+There are a lot of next steps which I could see is:
+* Automate the string extraction part from the results of start and end point in a string
+* Creating a webapp where a pdf could be uploaded and the details are shown
+
+I will be working on it as a next project and enhance this use-case a little further
+
+Please reach out to me on akshayjhawar.nitj@gmail.com if you have any questions.
