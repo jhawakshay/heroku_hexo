@@ -1,5 +1,5 @@
 ---
-title: Solving Underwriting & Risk through OCR and NLP
+title: Solving Credit Underwriting & Risk through OCR and NLP
 date: 2020-08-01 21:58:47
 tags: [OCR, Pytesseract,NLP,Text Parsing ]
 ---
