@@ -11,7 +11,6 @@
         </h2>
       <% } %>
     </div>
-    <div id="header-inner" class="inner">
     <div>
         <ul class="nav navbar-nav">
             <% for (var i in theme.menu) { %>
@@ -30,6 +29,7 @@
             </li>
         </ul>
     </div>
+    <div id="header-inner" class="inner">
       <nav id="sub-nav">
         <% if (theme.rss){ %>
           <a id="nav-rss-link" class="nav-icon" href="<%- url_for(theme.rss) %>" title="<%= __('rss_feed') %>"></a>
