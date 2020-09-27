@@ -5,6 +5,12 @@ menu:
 #rss: /atom.xml
   github: https://github.com/jhawakshay/
   about me:
+  
+menumore:
+  books: books
+  music: music
+  video: video
+  life: life
 
 # Content
 excerpt_link: Read More
