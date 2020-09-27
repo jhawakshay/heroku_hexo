@@ -12,6 +12,10 @@
       <% } %>
     </div>
     <div>
+      <ul class="nav navbar-nav">
+            <% for (var i in theme.menu) { %>
+                <a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= __('index.' + i) %></a>
+            <% } %>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <%= __('index.more') %> 
@@ -23,6 +27,7 @@
                     <% } %>
                 </ul>
             </li>
+      </ul>
     </div>
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
